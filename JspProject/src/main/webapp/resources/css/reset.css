@@ -1,0 +1,269 @@
+@font-face {
+    font-family: "Pretendard-Black";
+    src: url("https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Black.woff")
+    format("woff");
+    font-weight: 900;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Pretendard-ExtraBold";
+    src: url("https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-ExtraBold.woff")
+    format("woff");
+    font-weight: 800;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Pretendard-Bold";
+    src: url("https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Bold.woff")
+    format("woff");
+    font-weight: 700;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Pretendard-SemiBold";
+    src: url("https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-SemiBold.woff")
+    format("woff");
+    font-weight: 600;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Pretendard-Medium";
+    src: url("https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Medium.woff")
+    format("woff");
+    font-weight: 500;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Pretendard-Regular";
+    src: url("https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff")
+    format("woff");
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Pretendard-Light";
+    src: url("https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Light.woff")
+    format("woff");
+    font-weight: 300;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Pretendard-ExtraLight";
+    src: url("https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-ExtraLight.woff")
+    format("woff");
+    font-weight: 200;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Pretendard-Thin";
+    src: url("https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Thin.woff")
+    format("woff");
+    font-weight: 100;
+    font-style: normal;
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Pretendard", sans-serif;
+}
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    vertical-align: baseline;
+    font-family: "Pretendard", sans-serif;
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--text);
+    word-break: keep-all;
+}
+
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+    display: block;
+}
+body {
+    line-height: 1;
+}
+ol,
+ul {
+    list-style: none;
+}
+blockquote,
+q {
+    quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+li {
+    list-style: none;
+}
+a {
+    /* display: block; */
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+
+
+
+
+html {
+    font-size: 16px;
+}
+h1 {
+    font-size: 2.5rem;  /* 40px */
+    font-weight: 700;  /* Bold */
+}
+
+h2 {
+    font-size: 2rem;  /* 32px */
+    font-weight: 600;  /* Semi-bold */
+}
+
+h3 {
+    font-size: 1.75rem;  /* 28px */
+    font-weight: 600;  /* Semi-bold */
+}
+
+h4 {
+    font-size: 1.5rem;  /* 24px */
+    font-weight: 500;  /* Medium */
+}
+
+h5 {
+    font-size: 1.25rem;  /* 20px */
+    font-weight: 500;  /* Medium */
+}
+body {
+    font-size: 1.6rem;
+    color: var(--text);
+}
+input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+label {
+    cursor: pointer;
+}
+
+.no-reset,
+.no-reset *,
+.no-reset *::before,
+.no-reset *::after {
+    margin: inherit;
+    padding: unset;
+    border: inherit;
+    outline: inherit;
+    vertical-align: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    color: inherit;
+    word-break: inherit;
+    line-height: 1.5em;
+}
