@@ -7,7 +7,7 @@
     <t:filePath dir1="resources" dir2="js" dir3="modules" dir4="pager.module.js" />
 
     <div class="button-control-wrapper">
-        <button type="button" class="guide" data-type="small" onclick="handleLoad()">목록 요청</button>
+        <button type="button" onclick="handleLoad()">목록 요청</button>
     </div>
     <t:searchBar sectionId="manageSystemNoticeList" className="mt-20" />
 

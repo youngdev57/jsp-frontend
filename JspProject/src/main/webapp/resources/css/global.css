@@ -1106,6 +1106,11 @@ h2.common-title {
         font-size: var(--font-basic);
     }
 }
+.guide-container button[data-type="small"] {
+    width: fit-content;
+    height: 40px;
+    padding: 0 10px;
+}
 .code-snippet {
     display: flex;
     flex-direction: column;
