@@ -95,7 +95,7 @@
                     <div class="column-content">선택</div>
                 </div>
                 <div class="column-textarea-wrapper">
-                    <div class="column-header"><label for="textarea">텍스트 상자</label></div>
+                    <div class="column-header">텍스트 상자</div>
                     <div class="column-content">
                         모든 국민은 근로의 의무를 진다. 국가는 근로의 의무의 내용과 조건을 민주주의원칙에 따라 법률로 정한다.
                         근로자는 근로조건의 향상을 위하여 자주적인 단결권·단체교섭권 및 단체행동권을 가진다.

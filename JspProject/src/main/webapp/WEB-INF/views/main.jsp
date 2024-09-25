@@ -8,10 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JSP Test</title>
-
-    <%-- Web Fonts --%>
-<%--    <link rel="stylesheet" as="style" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />--%>
+    <title>youngdev</title>
 
     <%-- libs --%>
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -34,9 +31,6 @@
     <script src="${path}/resources/js/modules/api.module.js"></script>
     <script src="${path}/resources/js/modules/util.module.js"></script>
     <script src="${path}/resources/js/modules/pager.module.js"></script>
-
-    <%-- modal --%>
-    <script src="${path}/resources/js/modules/modal.module.js"></script>
 
     <%-- admin --%>
     <link rel="stylesheet" href="${path}/resources/css/pages/modal.css">
