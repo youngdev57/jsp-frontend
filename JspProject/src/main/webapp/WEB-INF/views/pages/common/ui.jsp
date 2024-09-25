@@ -198,7 +198,29 @@
         <%-- Modal --%>
         <h4 class="sub-title">Modal</h4>
         <div class="sub-content">
-            <button>모달 열기</button>
+            <button class="tertiary" onclick="handleOpenModal()">모달 열기</button>
+        </div>
+
+        <%-- Modal Box --%>
+        <div id="modal" class="modal-container">
+            <div class="modal-content">
+                <span class="modal-close" onclick="handleCloseModal()"><i class="bx bx-x"></i></span>
+                <div class="modal-header"><span>Modal Title</span></div>
+                <div class="modal-body">
+                    <div class="flex-column gap-20 mt-40">
+                        <div class="common-form-wrapper">
+                            <div>
+                                <div class="column-header">👋🏻 설명 1</div>
+                                <div class="column-content">모달 내부는 원하는 내용으로 채울 수 있으며 모달 크기도 자유롭게 지정할 수 있습니다.</div>
+                            </div>
+                            <div>
+                                <div class="column-header">👋🏻 설명 2</div>
+                                <div class="column-content">폼 확인하기 : <a href="${path}/common/form" class="link">🏡 > Common > Form</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <%-- Code Snippet Style --%>
@@ -222,4 +244,14 @@
     document.addEventListener("DOMContentLoaded", function () {
 
     })
+
+    const handleOpenModal = () => {
+        const modal = document.querySelector("#modal");
+        modal.classList.add("active");
+    }
+
+    const handleCloseModal = () => {
+        const modal = document.querySelector("#modal");
+        modal.classList.remove("active");
+    }
 </script>

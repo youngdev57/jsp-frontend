@@ -1,191 +1,63 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
-
-.modal-block {
+.modal-container {
+    position: fixed;
+    z-index: 800;
+    left: 0;
+    top: 0;
     width: 100%;
     height: 100%;
+    overflow: auto;
     background: rgba(0, 0, 0, 0.3);
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 10;
-}
-
-.modal-popup {
-    position: fixed;
-    left: 50%;
-}
-
-.modal-popup {
-    background: #fff;
-    padding: 20px;
-    border-radius: 15px;
-    top: -150%;
-    max-width: 380px;
-    width: 100%;
     opacity: 0;
-    pointer-events: none;
-    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
-    transform: translate(-50%, -50%) scale(1.2);
-    /*transition: top 0s 0.2s ease-in-out,*/
-    /*opacity 0.2s 0s ease-in-out,*/
-    /*transform 0.2s 0s ease-in-out;*/
+    visibility: hidden;
+    transition: opacity 0.1s ease, visibility 0.3s ease;
 }
 
-.modal-popup.show {
-    top: 50%;
+.modal-container.active {
     opacity: 1;
-    pointer-events: auto;
-    transform: translate(-50%, -50%) scale(1);
-    transition: top 0s 0s ease-in-out,
-    opacity 0.2s 0s ease-in-out,
-    transform 0.2s 0s ease-in-out;
-    border: 1px solid #eee;
+    visibility: visible;
+}
+
+.modal-container .modal-content {
     z-index: 999;
-}
-
-.modal-popup :is(header, .icons, .field) {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 40px;
-}
-
-.modal-popup header {
-    height: auto;
-}
-
-.modal-popup header span {
-    font-size: 32px;
-    font-weight: var(--weight-semi-bold);
-}
-
-.modal-popup header .modal-close, .icons a {
-    display: flex;
-    align-items: center;
-    border-radius: 50%;
-    justify-content: center;
-    transition: all 0.3s ease-in-out;
-}
-
-.modal-popup header .modal-close {
-    background: var(--black);
-    height: 40px;
-    width: 40px;
-    cursor: pointer;
     position: absolute;
-    right: 20px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /*scale(1.2);*/
+    padding: 25px;
+    width: fit-content;
+    min-width: 400px;
+    max-width: 80%;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+.modal-header {
+    height: auto;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #ebedf9;
+}
+
+.modal-header span {
+    font-size: 21px;
+    font-weight: 600;
+}
+
+.modal-close {
+    position: absolute;
+    right: 25px;
     top: 20px;
-}
-.modal-popup .bx.bx-x::before {
-    color: var(--white);
+    cursor: pointer;
 }
 
-.modal-popup .modal-content {
-    width: 500px;
-    margin: 40px auto;
+.modal-close i {
+    font-size: 24px;
+    padding: 3px;
+    background: var(--light-grey);
+    border-radius: 50%;
+    cursor: pointer
 }
 
-.modal-content > .modal-content-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.modal-content-wrapper > div {
-    display: flex;
-    align-items: center;
-    height: 30px;
-}
-
-.modal-content-wrapper > div > p:nth-child(1),
-.modal-content-wrapper > div > label:nth-child(1) {
-    width: 30%;
-    flex-shrink: 0;
-}
-
-.modal-content select {
-    width: 500px;
-    height: 60px;
-    padding: 0 20px;
-    font-size: 18px;
-}
-
-.modal-button-wrapper {
-    display: flex;
-    margin: 20px 0;
-    justify-content: center;
-    gap: 10px;
-}
-
-.modal-inner-button {
-    border-radius: 10px;
-    background: #246BEB;
-    color: var(--white);
-    transition: var(--transition-2s);
-}
-
-.modal-inner-button.btn-detail {
-    width: 72px;
-    height: 35px;
-    background: var(--danger);
-    border-radius: 5px;
-    border: none;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 8px 12px;
-    font-size: 14px;
-    font-weight: normal;
-}
-
-#modal-excel-upload section.section-upload,
-#modal-student-survey section.section-upload {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-#modal-excel-upload section.section-dragged,
-#modal-student-survey section.section-dragged {
-    flex-direction: column;
-    padding: 20px 30px;
-    border: 1px dashed #ccc;
-    border-radius: 10px;
-    gap: 20px;
-    text-align: center;
-}
-
-#modal-excel-upload section.section-dragged p,
-#modal-student-survey section.section-dragged p {
-    font-size: 14px;
-    color: #666;
-    letter-spacing: -1px;
-    line-height: 18px;
-}
-
-#modal-excel-upload section.section-uploaded-file,
-#modal-student-survey section.section-uploaded-file {
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    padding: 10px 20px;
-    justify-content: space-between;
-}
-
-#modal-excel-upload section.section-uploaded-file p,
-#modal-student-survey section.section-uploaded-file p {
-    font-size: 18px;
-    color: #888;
-}
-
-#modal-student-survey #btn-remove {
-    height: 20px;
-    background: url("../../img/icon/icon-close-black.png") no-repeat 100% 100%;
-}
-
-#modal-student-survey .caution-text {
-    font-weight: normal;
-    color: var(--danger);
-    font-size: 16px;
-    letter-spacing: -1px;
+.modal-body {
+    margin: 30px 0;
 }
