@@ -13,7 +13,9 @@
         </div>
 
         <div class="button-control-wrapper">
-            <button type="button" class="" data-type="small" onclick="applyGrid()">적용하기</button>
+            <button type="button" class="tertiary" onclick="applyGridOutput()">데이터 적용</button>
+            <button type="button" class="tertiary" onclick="clearGridOutput()">데이터 지우기</button>
+            <button type="button" class="tertiary" onclick="initializeGridOutput()">데이터 초기화</button>
         </div>
 
         <%-- output --%>
@@ -26,26 +28,7 @@
                     <p>제목3</p>
                     <p>제목4</p>
                 </div>
-                <div class="grid-row-wrapper">
-                    <div class="grid-row">
-                        <p>제목1에 관한 내용입니다.</p>
-                        <p>제목2에 관한 내용입니다.</p>
-                        <p>제목3에 관한 내용입니다.</p>
-                        <p>제목4에 관한 내용입니다.</p>
-                    </div>
-                    <div class="grid-row">
-                        <p>제목1에 관한 내용입니다.</p>
-                        <p>제목2에 관한 내용입니다.</p>
-                        <p>제목3에 관한 내용입니다.</p>
-                        <p>제목4에 관한 내용입니다.</p>
-                    </div>
-                    <div class="grid-row">
-                        <p>제목1에 관한 내용입니다.</p>
-                        <p>제목2에 관한 내용입니다.</p>
-                        <p>제목3에 관한 내용입니다.</p>
-                        <p>제목4에 관한 내용입니다.</p>
-                    </div>
-                </div>
+                <div class="grid-row-wrapper"></div>
             </div>
         </div>
     </section>
@@ -54,9 +37,41 @@
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         initializeQualifications();
+        initializeGridOutput();
     })
 
-    const applyGrid = () => {
-        console.log("[module/api.jsp] called by handleLoad.")
+    const applyGridOutput = () => {
+
+    }
+    
+    const initializeGridOutput = () => {
+        const targetElement = document.querySelector(".grid-row-wrapper");
+        const innerContent = `
+            <div class="grid-row">
+                <p>제목1에 관한 내용입니다.</p>
+                <p>제목2에 관한 내용입니다.</p>
+                <p>제목3에 관한 내용입니다.</p>
+                <p>제목4에 관한 내용입니다.</p>
+            </div>
+            <div class="grid-row">
+                <p>제목1에 관한 내용입니다.</p>
+                <p>제목2에 관한 내용입니다.</p>
+                <p>제목3에 관한 내용입니다.</p>
+                <p>제목4에 관한 내용입니다.</p>
+            </div>
+            <div class="grid-row">
+                <p>제목1에 관한 내용입니다.</p>
+                <p>제목2에 관한 내용입니다.</p>
+                <p>제목3에 관한 내용입니다.</p>
+                <p>제목4에 관한 내용입니다.</p>
+            </div>
+        `;
+
+        targetElement.insertAdjacentHTML("beforeend", innerContent);
+    }
+
+    const clearGridOutput = () => {
+        const targetElement = document.querySelector(".grid-row-wrapper");
+        targetElement.innerHTML = '';
     }
 </script>
