@@ -28,6 +28,33 @@
             <ul class="description-wrapper">
                 <li>· <span class="incd">input[type="text"]</span> 태그의 경우 "<span class="incd">field-name</span>을 입력해 주세요."라는 alert를 표시합니다.</li>
                 <li>· <span class="incd">select</span> 태그의 경우 "<span class="incd">field-name</span>을 선택해 주세요."라는 alert를 표시합니다.</li>
+                <li><b>작동 예시</b></li>
+                <li>
+                    <div class="common-form-wrapper">
+                        <div>
+                            <div class="column-header"><label for="textFruits">과일(텍스트)</label></div>
+                            <div class="column-content">
+                                <input id="textFruits" type="text" placeholder="아무 과일을 입력해 주세요." value="" data-field="true" />
+                            </div>
+                        </div>
+                        <div>
+                            <div class="column-header"><label for="selectFruits">과일(선택)</label></div>
+                            <div class="column-content">
+                                <select id="selectFruits" data-field="true">
+                                    <option value="">선택</option>
+                                    <option value="apple">Apple</option>
+                                    <option value="orange">Orange</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="column-header">실행</div>
+                            <div class="column-content">
+                                <button type="button" class="secondary" onclick="runAlertRequiredMessage()">함수 실행</button>
+                            </div>
+                        </div>
+                    </div>
+                </li>
             </ul>
         </div>
         <h4 id="convertQueryParameterToJson" class="sub-title">convertQueryParameterToJson()</h4>
@@ -180,7 +207,7 @@
                 <li><b>실행</b></li>
                 <li class="flex gap-20">
                     <button class="tertiary" onclick="generateLanguageTypeOptions()">함수 실행</button>
-                    <select id="languageType" style="height: 60px"></select>
+                    <select id="languageType"></select>
                 </li>
             </ul>
         </div>
@@ -271,5 +298,13 @@
             optionElements += `<option value="${"${option.value}"}">${"${option.text}"}</option>`);
 
         targetElement.append(optionElements);
+    }
+
+    const runAlertRequiredMessage = () => {
+        const { fields } = generateValidDataFromField();
+        for (let index = 0; index < fields.length; index ++) {
+            if (!fields[index].value)
+                return alertRequiredMessage(fields[index].tagName, fields[index].label);
+        }
     }
 </script>

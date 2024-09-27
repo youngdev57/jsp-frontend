@@ -534,7 +534,8 @@ h2.common-title {
     flex-grow: 1;
     padding: 15px 20px;
     line-height: 25px;
-    color: #666;
+    color: var(--text);
+    background: var(--white);
 }
 .common-form-wrapper .column-content.flex-start {
     flex-direction: column;
@@ -1211,4 +1212,7 @@ h2.common-title {
 #qualifications .btn-wrapper {
     width: 40px;
     margin-left: 10px;
+}
+#util button {
+    height: 50px;
 }
