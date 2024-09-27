@@ -17,7 +17,7 @@ function handleServerErrorMessage(error) {
  * @param tagName
  * @param fieldName
  */
-function handleRequiredMessage(tagName = "", fieldName = "") {
+function alertRequiredMessage(tagName = "", fieldName = "") {
     if (!tagName || !fieldName) return;
 
     let suffixMessage = "";
