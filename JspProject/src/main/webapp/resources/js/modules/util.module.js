@@ -13,24 +13,41 @@ function handleServerErrorMessage(error) {
 }
 
 /**
- * 필수 입력값 요청 Alert를 표시하는 함수
- * @param tagName
- * @param fieldName
+ 필수 입력값을 요청하는 Alert를 표시하는 함수
+ data-required="true" 속성으로 대상을 지정
+ * @param selector
  */
-function alertRequiredMessage(tagName = "", fieldName = "") {
-    if (!tagName || !fieldName) return;
-
-    let suffixMessage = "";
-    switch (tagName) {
-        case "SELECT":
-            suffixMessage = "을(를) 선택해 주세요.";
-            break;
-        case "INPUT":
-        default:
-            suffixMessage = "을(를) 입력해 주세요.";
+function alertRequiredMessage(selector) {
+    const actions = {
+        SELECT: "선택",
+        RADIO: "선택",
+        DATE: "선택",
+        TEXTAREA: "작성",
+        CHECKBOX: "체크",
+        FILE: "업로드",
+        INPUT: "입력",
+        NUMBER: "입력",
+        TEL: "입력",
+        EMAIL: "입력"
     }
 
-    alert(fieldName + suffixMessage);
+    document.querySelectorAll(selector).forEach(function (element) {
+        const founds = element.querySelectorAll('[data-required="true"]');
+        for (const found of founds) {
+            const label = element.querySelector(`label[for="${found.id}"]`).textContent || "";
+            if (!label || found.value) continue;
+
+            const target = {
+                label: label,
+                tagName: found.tagName.toUpperCase()
+            };
+
+            if (!target) return;
+
+            alert(`${target.label}을(를) ${actions[target.tagName]}해 주세요.`);
+            return;
+        }
+    });
 }
 
 /**
