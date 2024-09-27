@@ -26,9 +26,8 @@
         <div id="alertRequiredMessageContent" class="sub-content mg-0">
             <t:callout emoji="📝" description="필수 입력값 요청 Alert를 표시하는 함수" color="transparent" />
             <ul class="description-wrapper">
+                <li>다양한 입력 형태(input, select, textarea 등...)에 따라 적절한 메세지를 출력합니다.</li>
                 <li>· <span class="incd">data-required="true"</span> 속성으로 대상을 지정합니다.</li>
-                <li>· <span class="incd">input[type="text"]</span> 태그의 경우 "<span class="incd">field-name</span>을 입력해 주세요."라는 alert를 표시합니다.</li>
-                <li>· <span class="incd">select</span> 태그의 경우 "<span class="incd">field-name</span>을 선택해 주세요."라는 alert를 표시합니다.</li>
                 <li><b>작동 예시</b></li>
                 <li>
                     <div class="common-form-wrapper">
