@@ -23,34 +23,35 @@
 
     <section class="mt-20">
         <h4 id="alertRequiredMessage" class="sub-title">alertRequiredMessage()</h4>
-        <div class="sub-content mg-0">
+        <div id="alertRequiredMessageContent" class="sub-content mg-0">
             <t:callout emoji="📝" description="필수 입력값 요청 Alert를 표시하는 함수" color="transparent" />
             <ul class="description-wrapper">
+                <li>· <span class="incd">data-required="true"</span> 속성으로 대상을 지정합니다.</li>
                 <li>· <span class="incd">input[type="text"]</span> 태그의 경우 "<span class="incd">field-name</span>을 입력해 주세요."라는 alert를 표시합니다.</li>
                 <li>· <span class="incd">select</span> 태그의 경우 "<span class="incd">field-name</span>을 선택해 주세요."라는 alert를 표시합니다.</li>
                 <li><b>작동 예시</b></li>
                 <li>
                     <div class="common-form-wrapper">
                         <div>
-                            <div class="column-header"><label for="textFruits">과일(텍스트)</label></div>
+                            <div class="column-header"><label for="textFruits">입력 예시</label></div>
                             <div class="column-content">
-                                <input id="textFruits" type="text" placeholder="아무 과일을 입력해 주세요." value="" data-field="true" />
+                                <input id="textFruits" type="text" placeholder="아무 과일을 입력해 주세요." data-required="true" />
                             </div>
                         </div>
                         <div>
-                            <div class="column-header"><label for="selectFruits">과일(선택)</label></div>
+                            <div class="column-header"><label for="selectFruits">선택 예시</label></div>
                             <div class="column-content">
-                                <select id="selectFruits" data-field="true">
+                                <select id="selectFruits" data-required="true">
                                     <option value="">선택</option>
-                                    <option value="apple">Apple</option>
-                                    <option value="orange">Orange</option>
+                                    <option value="apple">사과</option>
+                                    <option value="orange">오렌지</option>
                                 </select>
                             </div>
                         </div>
                         <div>
                             <div class="column-header">실행</div>
                             <div class="column-content">
-                                <button type="button" class="secondary" onclick="runAlertRequiredMessage()">함수 실행</button>
+                                <button type="button" class="secondary" onclick="alertRequiredMessage('#alertRequiredMessageContent')">함수 실행</button>
                             </div>
                         </div>
                     </div>
@@ -298,13 +299,5 @@
             optionElements += `<option value="${"${option.value}"}">${"${option.text}"}</option>`);
 
         targetElement.append(optionElements);
-    }
-
-    const runAlertRequiredMessage = () => {
-        const { fields } = generateValidDataFromField();
-        for (let index = 0; index < fields.length; index ++) {
-            if (!fields[index].value)
-                return alertRequiredMessage(fields[index].tagName, fields[index].label);
-        }
     }
 </script>
