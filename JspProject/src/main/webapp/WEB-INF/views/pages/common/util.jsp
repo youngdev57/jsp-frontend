@@ -28,7 +28,7 @@
             <ul class="description-wrapper">
                 <li>다양한 입력 형태(input, select, textarea 등...)에 따라 적절한 메세지를 출력합니다.</li>
                 <li>· <span class="incd">data-required="true"</span> 속성으로 대상을 지정합니다.</li>
-                <li><b>작동 예시</b></li>
+                <li><b>실행</b></li>
                 <li>
                     <div class="common-form-wrapper">
                         <div>
@@ -148,6 +148,23 @@
                         <p><span class="keyword">return</span> "Hello world.";</p>
                     </div>
                 </li>
+                <li><b>실행</b></li>
+                <li>
+                    <div class="common-form-wrapper">
+                        <div>
+                            <div class="column-header"><label for="textHtml">입력 예시</label></div>
+                            <div class="column-content">
+                                <input id="textHtml" type="text" value="<p class='info'>Hello world.</p>" placeholder="HTML 코드를 입력해 주세요." />
+                            </div>
+                        </div>
+                        <div>
+                            <div class="column-header">실행</div>
+                            <div class="column-content">
+                                <button type="button" class="secondary" onclick="convertTextHtmlToPlain()">함수 실행</button>
+                            </div>
+                        </div>
+                    </div>
+                </li>
             </ul>
         </div>
         <h4 id="handleCurrentPage" class="sub-title">handleCurrentPage()</h4>
@@ -205,9 +222,21 @@
                     </div>
                 </li>
                 <li><b>실행</b></li>
-                <li class="flex gap-20">
-                    <button class="tertiary" onclick="generateLanguageTypeOptions()">함수 실행</button>
-                    <select id="languageType"></select>
+                <li>
+                    <div class="common-form-wrapper">
+                        <div>
+                            <div class="column-header"><label for="textHtml">선택</label></div>
+                            <div class="column-content">
+                                <select id="languageType"></select>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="column-header">실행</div>
+                            <div class="column-content">
+                                <button type="button" class="secondary" onclick="generateLanguageTypeOptions()">함수 실행</button>
+                            </div>
+                        </div>
+                    </div>
                 </li>
             </ul>
         </div>
@@ -298,5 +327,11 @@
             optionElements += `<option value="${"${option.value}"}">${"${option.text}"}</option>`);
 
         targetElement.append(optionElements);
+    }
+    
+    const convertTextHtmlToPlain = () => {
+        const targetElement = document.getElementById("textHtml");
+        const htmlText = targetElement.value;
+        targetElement.value = getPlainTextFromHTML(htmlText);
     }
 </script>
