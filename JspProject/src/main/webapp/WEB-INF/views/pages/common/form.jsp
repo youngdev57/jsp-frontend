@@ -28,10 +28,10 @@
                         <div class="column-header"><label>다중 항목2</label></div>
                         <div class="column-content">
                             <label for="checkbox01">
-                                <input id="checkbox01" type="checkbox" />옵션1
+                                <input id="checkbox01" type="checkbox" class="checkbox-group" />옵션1
                             </label>
                             <label for="checkbox02">
-                                <input id="checkbox02" type="checkbox" />옵션2
+                                <input id="checkbox02" type="checkbox" class="checkbox-group" />옵션2
                             </label>
                         </div>
                     </div>
@@ -49,9 +49,9 @@
                     <div class="column-header"><label for="select">선택 항목</label></div>
                     <div class="column-content">
                         <select id="select" data-field="true">
-                            <option disabled selected style="display: none">선택</option>
-                            <option value="select01">선택1</option>
-                            <option value="select02">선택2</option>
+                            <option disabled selected style="display: none" value="">선택</option>
+                            <option value="선택1">선택1</option>
+                            <option value="선택2">선택2</option>
                         </select>
                     </div>
                 </div>
@@ -63,8 +63,8 @@
                 </div>
             </div>
             <div class="common-form-button-wrapper">
-                <button class="tertiary" onclick="resetForm()">되돌리기</button>
-                <button class="primary" onclick="applyForm()">적용하기</button>
+                <button class="tertiary" onclick="resetFormInput()">되돌리기</button>
+                <button class="primary" onclick="applyFormOutput()">적용하기</button>
             </div>
         </div>
 
@@ -74,29 +74,29 @@
             <div class="common-form-wrapper">
                 <div>
                     <div class="column-header">단일 항목</div>
-                    <div class="column-content">단일 항목 1에 관한 내용입니다.</div>
+                    <div class="column-content single">단일 항목 1에 관한 내용입니다.</div>
                 </div>
                 <div class="multi-column-wrapper">
                     <div>
                         <div class="column-header">다중 항목1</div>
-                        <div class="column-content">2024-01-01</div>
+                        <div class="column-content multi01">2024-01-01</div>
                     </div>
                     <div>
                         <div class="column-header">다중 항목2</div>
-                        <div class="column-content">옵션1</div>
+                        <div class="column-content checkboxes">옵션1</div>
                     </div>
                 </div>
                 <div>
                     <div class="column-header">라디오 버튼</div>
-                    <div class="column-content">선택1</div>
+                    <div class="column-content radios">선택1</div>
                 </div>
                 <div>
                     <div class="column-header">선택 항목</div>
-                    <div class="column-content">선택</div>
+                    <div class="column-content select">선택</div>
                 </div>
                 <div class="column-textarea-wrapper">
                     <div class="column-header">텍스트 상자</div>
-                    <div class="column-content">
+                    <div class="column-content textarea">
                         모든 국민은 근로의 의무를 진다. 국가는 근로의 의무의 내용과 조건을 민주주의원칙에 따라 법률로 정한다.
                         근로자는 근로조건의 향상을 위하여 자주적인 단결권·단체교섭권 및 단체행동권을 가진다.
                         대통령이 궐위된 때 또는 대통령 당선자가 사망하거나 판결 기타의 사유로 그 자격을 상실한 때에는 60일 이내에 후임자를 선거한다. <br><br>
@@ -107,20 +107,54 @@
                 </div>
             </div>
             <div class="common-form-button-wrapper">
-                <button class="tertiary" onclick="">목록</button>
-                <button class="danger" onclick="">삭제</button>
-                <button class="secondary" onclick="">수정</button>
+                <button class="tertiary" onclick="resetFormOutput()">되돌리기</button>
             </div>
         </div>
     </section>
 </div>
 
 <script>
-    const resetForm = () => {
+    document.addEventListener("DOMContentLoaded", function () {
+        initializeForm();
+    })
+
+    const initializeForm = () => {
+        resetFormInput();
+        resetFormOutput();
+    }
+
+    const resetFormInput = () => {
+        const targetIds = ["single", "multi01", "select", "textarea"];
+        targetIds.forEach(elementId => document.getElementById(elementId).value = "");
+
+        const checkboxes = document.querySelectorAll(".checkbox-group");
+        [...checkboxes].forEach(checkbox => checkbox.checked = false);
+
+        // TODO radio button
+    }
+
+    const resetFormOutput = () => {
 
     }
 
-    const applyForm = () => {
+    const applyFormOutput = () => {
+        const targetIds = ["single", "multi01", "select", "textarea"];
+        targetIds.forEach(elementId => {
+            const element = document.getElementById(elementId);
+            const matched = document.querySelector('.' + elementId);
+            matched.textContent = element.value || "";
+        })
 
+        const checkboxes = document.querySelectorAll(".checkbox-group");
+        const checked = [...checkboxes].filter(checkbox => checkbox.checked);
+        const labels = checked.map(checkbox => {
+            const label = document.querySelector(`label[for="${'${checkbox.id}'}"]`);
+            return label ? getPlainTextFromHTML(label.textContent).trim() : null;
+        })
+
+        const checkboxOutput = document.querySelector(".checkboxes");
+        checkboxOutput.textContent = labels.join(", ");
+
+        // TODO radio button
     }
 </script>
