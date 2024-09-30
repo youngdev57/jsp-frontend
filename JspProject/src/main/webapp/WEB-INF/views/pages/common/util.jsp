@@ -282,13 +282,34 @@
                 <li><b>입력 예시</b></li>
                 <li>
                     <div class="code-snippet">
-                        <p><span class="keyword">const</span> contact = <span class="func">convertMobileFormat</span>("01012345678", "-");</p>
+                        <p><span class="keyword">const</span> mobile = <span class="func">convertMobileFormat</span>("01012345678", "-");</p>
                     </div>
                 </li>
                 <li><b>반환 예시</b></li>
                 <li>
                     <div class="code-snippet">
                         <p><span class="keyword">return</span> "010-1234-5678";</p>
+                    </div>
+                </li>
+                <li><b>실행</b></li>
+                <li>
+                    <div class="common-form-wrapper">
+                        <div>
+                            <div class="column-header"><label for="mobile">입력 예시</label></div>
+                            <div class="column-content">
+                                <input id="mobile" type="text" placeholder="010-0000-0000" value="01012345678" />
+                            </div>
+                        </div>
+                        <div>
+                            <div class="column-header">반환 예시</div>
+                            <div class="column-content mobile"></div>
+                        </div>
+                        <div>
+                            <div class="column-header">실행</div>
+                            <div class="column-content">
+                                <button type="button" class="secondary" onclick="convertMobile()">함수 실행</button>
+                            </div>
+                        </div>
                     </div>
                 </li>
             </ul>
@@ -315,6 +336,10 @@
 </div>
 
 <script>
+    const message = {
+        notValidValue: "유효하지 않은 값입니다."
+    }
+
     document.addEventListener("DOMContentLoaded", function () {
 
     })
@@ -333,5 +358,13 @@
         const targetElement = document.getElementById("textHtml");
         const htmlText = targetElement.value;
         targetElement.value = getPlainTextFromHTML(htmlText);
+    }
+
+    const convertMobile = () => {
+        const target = document.getElementById("mobile");
+        const outputTarget = document.querySelector(".mobile");
+        const converted = convertMobileFormat(target.value);
+
+        outputTarget.textContent = converted ? converted : message.notValidValue;
     }
 </script>
