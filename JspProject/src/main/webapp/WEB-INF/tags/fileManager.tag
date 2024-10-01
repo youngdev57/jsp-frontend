@@ -30,16 +30,17 @@
     let files = [];
 
     const handleRemoveAttachedFile = (uniqueKey = "") => {
-        const target = $(`[data-eid="${'${uniqueKey}'}"]`);
-        if (target) {
+        const target = document.querySelectorAll(`[data-eid="${'${uniqueKey}'}"]`);
+        if (target.length > 0) {
             const foundIndex = files.findIndex(file => file.key === uniqueKey);
             if (foundIndex > -1)
                 files.splice(foundIndex, 1);
 
-            target.remove();
+            target.forEach(target => target.remove());
         }
 
-        $(".file-count").text("(" + files.length + "/" + maxFileCount + ")");
+        const fileCountElement = document.querySelector(".file-count");
+        fileCountElement.textContent = "(" + files.length + "/" + maxFileCount + ")";
 
         if (callbackRemove)
             callbackRemove();
@@ -76,7 +77,7 @@
     }
 
     const handleChangeFiles = () => {
-        const newFiles = Array.from($("#file-${id}")[0].files);
+        const newFiles = Array.from(document.getElementById("file-${id}").files);
         if ((files.length + newFiles.length) > maxFileCount)
             return alert("최대 " + maxFileCount + "개까지 등록 가능합니다.");
 
@@ -98,19 +99,20 @@
             file.key = uniqueKey;
         })
 
-        $(".selected-wrapper").html(innerElement);
-        $(".file-count").text("(" + files.length + "/" + maxFileCount + ")");
+        document.querySelector(".selected-wrapper").innerHTML = innerElement;
+        const fileCountElement = document.querySelector(".file-count");
+        fileCountElement.textContent = "(" + files.length + "/" + maxFileCount + ")";
 
         if (callbackChange)
             callbackChange();
     }
 
     const setFileName = (value = "") => {
-        $(".uploaded-file-name").val(value);
+        document.querySelector(".uploaded-file-name").value = value;
     }
 
     const getSelectedFiles = () => {
-        const targetElement = $("#file-${id}").get(0);
+        const targetElement = document.getElementById("file-${id}");
         return [...targetElement.files];
     }
 
@@ -157,7 +159,7 @@
         })
 
         const acceptValue = list.join(", ");
-        const targetElement = $("#file-${id}");
-        targetElement.attr("accept", acceptValue);
+        const targetElement = document.getElementById("file-${id}");
+        targetElement.setAttribute("accept", acceptValue);
     }
 </script>
