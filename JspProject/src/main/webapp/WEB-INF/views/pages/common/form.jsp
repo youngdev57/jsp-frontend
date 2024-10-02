@@ -39,10 +39,10 @@
                 <div>
                     <div class="column-header"><label for="radioGroupText">라디오 버튼</label></div>
                     <div class="column-content gap-30">
-                        <label class="flex gap-10 pd-0"><input id="radio01" type="radio" name="radioGroup" checked>선택1</label>
-                        <label class="flex gap-10 pd-0"><input id="radio02" type="radio" name="radioGroup">선택2</label>
-                        <label class="flex gap-10 pd-0"><input id="radio03" type="radio" name="radioGroup">기타</label>
-                        <input id="radioGroupText" type="text">
+                        <label for="radio01" class="flex gap-10 pd-0"><input id="radio01" type="radio" name="radioGroup" checked>선택1</label>
+                        <label for="radio02" class="flex gap-10 pd-0"><input id="radio02" type="radio" name="radioGroup">선택2</label>
+                        <label for="radio03" class="flex gap-10 pd-0"><input id="radio03" type="radio" name="radioGroup">기타</label>
+                        <input id="radioGroupText" type="text" disabled>
                     </div>
                 </div>
                 <div>
@@ -74,36 +74,29 @@
             <div class="common-form-wrapper">
                 <div>
                     <div class="column-header">단일 항목</div>
-                    <div class="column-content single">단일 항목 1에 관한 내용입니다.</div>
+                    <div class="column-content single"></div>
                 </div>
                 <div class="multi-column-wrapper">
                     <div>
                         <div class="column-header">다중 항목1</div>
-                        <div class="column-content multi01">2024-01-01</div>
+                        <div class="column-content multi01"></div>
                     </div>
                     <div>
                         <div class="column-header">다중 항목2</div>
-                        <div class="column-content checkboxes">옵션1</div>
+                        <div class="column-content checkboxes"></div>
                     </div>
                 </div>
                 <div>
                     <div class="column-header">라디오 버튼</div>
-                    <div class="column-content radios">선택1</div>
+                    <div class="column-content radios"></div>
                 </div>
                 <div>
                     <div class="column-header">선택 항목</div>
-                    <div class="column-content select">선택</div>
+                    <div class="column-content select"></div>
                 </div>
                 <div class="column-textarea-wrapper">
                     <div class="column-header">텍스트 상자</div>
-                    <div class="column-content textarea">
-                        모든 국민은 근로의 의무를 진다. 국가는 근로의 의무의 내용과 조건을 민주주의원칙에 따라 법률로 정한다.
-                        근로자는 근로조건의 향상을 위하여 자주적인 단결권·단체교섭권 및 단체행동권을 가진다.
-                        대통령이 궐위된 때 또는 대통령 당선자가 사망하거나 판결 기타의 사유로 그 자격을 상실한 때에는 60일 이내에 후임자를 선거한다. <br><br>
-                        대통령은 조국의 평화적 통일을 위한 성실한 의무를 진다. 제2항의 재판관중 3인은 국회에서 선출하는 자를, 3인은 대법원장이 지명하는 자를 임명한다.
-                        이 헌법중 공무원의 임기 또는 중임제한에 관한 규정은 이 헌법에 의하여 그 공무원이 최초로 선출 또는 임명된 때로부터 적용한다.
-                        탄핵결정은 공직으로부터 파면함에 그친다. 그러나, 이에 의하여 민사상이나 형사상의 책임이 면제되지는 아니한다.
-                    </div>
+                    <div class="column-content textarea"></div>
                 </div>
             </div>
             <div class="common-form-button-wrapper">
@@ -116,7 +109,20 @@
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         initializeForm();
+
+        const radioGroup = document.querySelectorAll(`input[name="radioGroup"]`);
+        radioGroup.forEach(radio => {
+            radio.addEventListener("change", () => addRadioChangeEventListener(radio.id))
+        })
+
+        const checked = document.querySelector('input[name="radioGroup"]:checked');
+        addRadioChangeEventListener(checked.id);
     })
+
+    const addRadioChangeEventListener = (targetId) => {
+        const radioGroupText = document.getElementById("radioGroupText");
+        radioGroupText.disabled = targetId !== "radio03";
+    }
 
     const initializeForm = () => {
         resetFormInput();
@@ -124,17 +130,51 @@
     }
 
     const resetFormInput = () => {
-        const targetIds = ["single", "multi01", "select", "textarea"];
+        const targetIds = ["single", "multi01", "select", "textarea", "radioGroupText"];
         targetIds.forEach(elementId => document.getElementById(elementId).value = "");
 
         const checkboxes = document.querySelectorAll(".checkbox-group");
         [...checkboxes].forEach(checkbox => checkbox.checked = false);
 
-        // TODO radio button
+        const radio = document.getElementById("radio01");
+        radio.checked = true;
     }
 
     const resetFormOutput = () => {
+        const contents = [
+            {
+                key: "single",
+                value: "단일 항목 1에 관한 내용입니다."
+            },
+            {
+                key: "multi01",
+                value: "2024-01-01"
+            },
+            {
+                key: "checkboxes",
+                value: "옵션1"
+            },
+            {
+                key: "radios",
+                value: "선택1"
+            },
+            {
+                key: "select",
+                value: "선택"
+            },
+            {
+                key: "textarea",
+                value: `모든 국민은 근로의 의무를 진다. 국가는 근로의 의무의 내용과 조건을 민주주의원칙에 따라 법률로 정한다. 근로자는 근로조건의 향상을 위하여 자주적인 단결권·단체교섭권 및 단체행동권을 가진다. 대통령이 궐위된 때 또는 대통령 당선자가 사망하거나 판결 기타의 사유로 그 자격을 상실한 때에는 60일 이내에 후임자를 선거한다. <br><br> 대통령은 조국의 평화적 통일을 위한 성실한 의무를 진다. 제2항의 재판관중 3인은 국회에서 선출하는 자를, 3인은 대법원장이 지명하는 자를 임명한다. 이 헌법중 공무원의 임기 또는 중임제한에 관한 규정은 이 헌법에 의하여 그 공무원이 최초로 선출 또는 임명된 때로부터 적용한다. 탄핵결정은 공직으로부터 파면함에 그친다. 그러나, 이에 의하여 민사상이나 형사상의 책임이 면제되지는 아니한다.`
+            }
+        ];
 
+        contents.forEach(content => {
+            const element = document.querySelector("." + content.key);
+            if (content.key === "textarea")
+                return element.innerHTML = content.value;
+
+            element.textContent = content.value;
+        })
     }
 
     const applyFormOutput = () => {
@@ -155,6 +195,14 @@
         const checkboxOutput = document.querySelector(".checkboxes");
         checkboxOutput.textContent = labels.join(", ");
 
-        // TODO radio button
+        const checkedRadioId = document.querySelector('input[name="radioGroup"]:checked').id;
+        const radioText = document.querySelector(`label[for="${'${checkedRadioId}'}"]`).textContent;
+        const radioOutput = document.querySelector(".radios");
+        const radioGroupText = document.getElementById("radioGroupText").value || "";
+
+        const suffixContent = checkedRadioId === "radio03" && radioGroupText
+            ? ` (${'${radioGroupText}'})` : "";
+
+        radioOutput.textContent = radioText + suffixContent;
     }
 </script>
