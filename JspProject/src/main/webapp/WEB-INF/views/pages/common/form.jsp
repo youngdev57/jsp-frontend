@@ -117,13 +117,14 @@
     }
 
     const resetFormInput = () => {
-        const targetIds = ["single", "multi01", "select", "textarea"];
+        const targetIds = ["single", "multi01", "select", "textarea", "radioGroupText"];
         targetIds.forEach(elementId => document.getElementById(elementId).value = "");
 
         const checkboxes = document.querySelectorAll(".checkbox-group");
         [...checkboxes].forEach(checkbox => checkbox.checked = false);
 
-        // TODO radio button
+        const radio = document.getElementById("radio01");
+        radio.checked = true;
     }
 
     const resetFormOutput = () => {
