@@ -39,10 +39,10 @@
                 <div>
                     <div class="column-header"><label for="radioGroupText">라디오 버튼</label></div>
                     <div class="column-content gap-30">
-                        <label class="flex gap-10 pd-0"><input id="radio01" type="radio" name="radioGroup" checked>선택1</label>
-                        <label class="flex gap-10 pd-0"><input id="radio02" type="radio" name="radioGroup">선택2</label>
-                        <label class="flex gap-10 pd-0"><input id="radio03" type="radio" name="radioGroup">기타</label>
-                        <input id="radioGroupText" type="text">
+                        <label for="radio01" class="flex gap-10 pd-0"><input id="radio01" type="radio" name="radioGroup" checked>선택1</label>
+                        <label for="radio02" class="flex gap-10 pd-0"><input id="radio02" type="radio" name="radioGroup">선택2</label>
+                        <label for="radio03" class="flex gap-10 pd-0"><input id="radio03" type="radio" name="radioGroup">기타</label>
+                        <input id="radioGroupText" type="text" disabled>
                     </div>
                 </div>
                 <div>
@@ -109,7 +109,20 @@
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         initializeForm();
+
+        const radioGroup = document.querySelectorAll(`input[name="radioGroup"]`);
+        radioGroup.forEach(radio => {
+            radio.addEventListener("change", () => addRadioChangeEventListener(radio.id))
+        })
+
+        const checked = document.querySelector('input[name="radioGroup"]:checked');
+        addRadioChangeEventListener(checked.id);
     })
+
+    const addRadioChangeEventListener = (targetId) => {
+        const radioGroupText = document.getElementById("radioGroupText");
+        radioGroupText.disabled = targetId !== "radio03";
+    }
 
     const initializeForm = () => {
         resetFormInput();
@@ -182,6 +195,14 @@
         const checkboxOutput = document.querySelector(".checkboxes");
         checkboxOutput.textContent = labels.join(", ");
 
-        // TODO radio button
+        const checkedRadioId = document.querySelector('input[name="radioGroup"]:checked').id;
+        const radioText = document.querySelector(`label[for="${'${checkedRadioId}'}"]`).textContent;
+        const radioOutput = document.querySelector(".radios");
+        const radioGroupText = document.getElementById("radioGroupText").value || "";
+
+        const suffixContent = checkedRadioId === "radio03" && radioGroupText
+            ? ` (${'${radioGroupText}'})` : "";
+
+        radioOutput.textContent = radioText + suffixContent;
     }
 </script>
