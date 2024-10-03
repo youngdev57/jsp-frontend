@@ -9,7 +9,7 @@
         <%-- input --%>
         <div class="flex-column gap-20 mt-40">
             <h2 class="common-title">Grid input</h2>
-            <t:qualifications />
+            <t:certificates />
         </div>
 
         <div class="common-form-button-wrapper">
