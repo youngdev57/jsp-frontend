@@ -9,13 +9,12 @@
         <%-- input --%>
         <div class="flex-column gap-20 mt-40">
             <h2 class="common-title">Grid input</h2>
-            <t:qualifications />
+            <t:certificates />
         </div>
 
-        <div class="button-control-wrapper">
-            <button type="button" class="tertiary" onclick="applyGridOutput()">데이터 적용</button>
-            <button type="button" class="tertiary" onclick="clearGridOutput()">데이터 지우기</button>
-            <button type="button" class="tertiary" onclick="initializeGridOutput()">데이터 초기화</button>
+        <div class="common-form-button-wrapper">
+            <button type="button" class="tertiary" onclick="clearGridInput()">되돌리기</button>
+            <button type="button" class="primary" onclick="applyGridOutput()">적용하기</button>
         </div>
 
         <%-- output --%>
@@ -31,22 +30,42 @@
                 <div class="grid-row-wrapper"></div>
             </div>
         </div>
+
+        <div class="common-form-button-wrapper">
+            <button type="button" class="tertiary" onclick="initializeGridOutput()">되돌리기</button>
+        </div>
     </section>
 </div>
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        initializeQualifications();
+        initializeCertificates();
         initializeGridOutput();
     })
 
     const applyGridOutput = () => {
+        const targetElement = document.querySelector(".grid-row-wrapper");
+        let innerContent = "";
 
+        const certificates = getCertificates();
+        // TODO need unique key
+        certificates.forEach(certificate => {
+            innerContent += `
+                <div class="grid-row">
+                    <p>${'${CertificateType[certificate.certificateType] || ""}'}</p>
+                    <p>${'${certificate.certificateName || ""}'}</p>
+                    <p>${'${certificate.issuingAuthority || ""}'}</p>
+                    <p>${'${certificate.issuedDate || ""}'}</p>
+                </div>
+            `;
+        })
+
+        targetElement.innerHTML = innerContent;
     }
     
     const initializeGridOutput = () => {
         const targetElement = document.querySelector(".grid-row-wrapper");
-        const innerContent = `
+        targetElement.innerHTML = `
             <div class="grid-row">
                 <p>제목1에 관한 내용입니다.</p>
                 <p>제목2에 관한 내용입니다.</p>
@@ -66,12 +85,11 @@
                 <p>제목4에 관한 내용입니다.</p>
             </div>
         `;
-
-        targetElement.insertAdjacentHTML("beforeend", innerContent);
     }
 
-    const clearGridOutput = () => {
-        const targetElement = document.querySelector(".grid-row-wrapper");
-        targetElement.innerHTML = '';
+    const clearGridInput = () => {
+        const targetElement = document.getElementById("certificates");
+        targetElement.innerHTML = "";
+        initializeCertificates();
     }
 </script>
