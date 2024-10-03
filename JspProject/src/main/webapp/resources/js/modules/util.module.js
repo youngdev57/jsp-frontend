@@ -171,7 +171,8 @@ function generateSelectOptions(commonCode, textAll = "") {
  */
 function getReversedCommonCode(value = "") {
     const commonCode = {
-        ...LanguageType
+        ...LanguageType,
+        ...CertificateType
     }
 
     let found = "";

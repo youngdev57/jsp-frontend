@@ -54,3 +54,7 @@ const LanguageType = {
     java: "자바",
     python: "파이썬"
 }
+const CertificateType = {
+    "CERT-01": "자격증",
+    "CERT-02": "면허증"
+}
