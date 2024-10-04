@@ -81,19 +81,18 @@ function generateValidDataFromField() {
     const result = {};
     const fields = [];
 
-    $(`[data-field="true"]`).each(function () {
-        const fieldId = $(this).attr("id") || "";
-        const value = $(this).val() || "";
-        const label = $(`label[for="${fieldId}"]`).text() || "";
-        const tagName = $(this).prop("tagName") || "";
+    document.querySelectorAll(`[data-field="true"]`).forEach(field => {
+        const { id, value, tagName } = field;
+        const label = document.querySelector(`label[for="${id}"]`);
+        const labelText = label ? label.innerText : null;
 
         fields.push({
-            key: fieldId,
-            value: value,
-            label: label,
-            tagName: tagName
+            key: id || null,
+            value: value || null,
+            label: labelText,
+            tagName: tagName || null
         });
-    });
+    })
 
     const processed = {};
     fields.map(field => processed[field.key] = field.value);
