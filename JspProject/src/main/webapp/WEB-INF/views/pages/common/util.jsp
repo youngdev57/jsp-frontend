@@ -225,7 +225,7 @@
                 <li>
                     <div class="common-form-wrapper">
                         <div>
-                            <div class="column-header"><label for="textHtml">선택</label></div>
+                            <div class="column-header"><label for="languageType">선택</label></div>
                             <div class="column-content">
                                 <select id="languageType"></select>
                             </div>
@@ -345,13 +345,13 @@
     })
 
     const generateLanguageTypeOptions = () => {
-        const targetElement = $("#languageType");
+        const targetElement = document.getElementById("languageType");
         let optionElements = '';
         const options = generateSelectOptions(LanguageType, "언어 선택");
         options.map(option =>
             optionElements += `<option value="${"${option.value}"}">${"${option.text}"}</option>`);
 
-        targetElement.append(optionElements);
+        targetElement.innerHTML = optionElements;
     }
     
     const convertTextHtmlToPlain = () => {
