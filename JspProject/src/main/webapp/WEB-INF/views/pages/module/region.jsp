@@ -24,24 +24,27 @@
 
 <script>
     const generateSidos = () => {
+        const sigunguElement = document.getElementById("sigungu");
+        sigunguElement.innerHTML = "";
+
         const sidos = getSidos();
-        const targetElement = $("#sido");
+        const targetElement = document.getElementById("sido");
         let optionElement = `<option value="">시/도 선택</option>`;
         sidos.forEach(sido => {
             optionElement += `<option value="${'${sido.code}'}">${'${sido.name}'}</option>`;
         });
-        targetElement.append(optionElement);
+        targetElement.innerHTML = optionElement;
     }
 
     const handleSelectSido = () => {
-        const selected = $("#sido").val();
+        const selected = document.getElementById("sido").value;
         const sigungus = getSigungusBySidoCode(selected);
 
-        const targetElement = $("#sigungu");
+        const targetElement = document.getElementById("sigungu");
         let optionElement = `<option value="">시/군/구 선택</option>`;
         sigungus.forEach(sigungu => {
             optionElement += `<option value="${'${sigungu.code}'}">${'${sigungu.name}'}</option>`;
         });
-        targetElement.html(optionElement);
+        targetElement.innerHTML = optionElement;
     }
 </script>
