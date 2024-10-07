@@ -23,8 +23,8 @@
 <script>
     let handleSearch;
 
-    $(document).keyup(function (event) {
-        if (event.which === 13)
+    document.addEventListener("keyup", function(e) {
+        if (e.key === "Enter")
             handleSearch();
     });
 
@@ -43,14 +43,15 @@
      * @param options
      */
     const setSearchSelectOptions = (options = []) => {
-        const selectElement = $("#sel-searchColumn");
+        const selectElement = document.getElementById("sel-searchColumn");
+        let optionElements = "";
         options.forEach(option => {
             const selected = option.selected ? "selected" : "";
-            const optionElement = `
+            optionElements += `
                 <option value="${'${option.value}'}" ${"${selected}"}>${'${option.text}'}</option>
             `;
-            selectElement.append(optionElement);
         });
+        selectElement.innerHTML = optionElements;
     }
 
     /**
@@ -59,7 +60,7 @@
      * @param includeAll
      */
     const setCustomSearchSelect = (selects = [], includeAll = true) => {
-        const wrapper = $(`#sec-${sectionId} .search-bar-wrapper`);
+        const wrapper = document.querySelector(`#sec-${sectionId} .search-bar-wrapper`);
         selects.forEach(select => {
             const opened = `<select id="sel-${"${select.id}"}" data-type="small">`;
             let optionElements = includeAll ? `<option value="" selected>전체</option>` : "";
@@ -67,7 +68,7 @@
                 optionElements += `<option value="${"${option.value}"}">${"${option.text}"}</option>`;
             });
             const closed =`</select>`;
-            wrapper.prepend(opened + optionElements + closed);
+            wrapper.prepend(opened + optionElements + closed); // TODO 구조 변경 후 제이쿼리 걷어내기 필요
         });
     }
 
@@ -77,13 +78,16 @@
      */
     const getSearchParameter = () => {
         const result = {};
-        const searchSection = $(`#sec-${sectionId}`);
-        result.searchKeyword = searchSection.find("#inp-search").val();
 
-        const searchSelects = searchSection.find("select");
-        searchSelects.each(function () {
-            const property = $(this).attr("id").replaceAll("sel-", "");
-            result[property] = $(this).val();
+        const searchSection = document.getElementById(`sec-${sectionId}`);
+
+        const searchInput = searchSection.querySelector("#inp-search");
+        result.searchKeyword = searchInput ? searchInput.value : "";
+
+        const searchSelects = searchSection.querySelectorAll("select");
+        searchSelects.forEach(select => {
+            const property = select.id.replace("sel-", "");
+            result[property] = select.value;
         });
 
         return result;
