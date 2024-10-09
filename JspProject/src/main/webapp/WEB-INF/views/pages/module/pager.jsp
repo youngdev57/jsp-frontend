@@ -23,7 +23,7 @@
 </div>
 
 <script>
-    const REUQEST_URL = "/notices";
+    const REQUEST_URL = "/notices";
 
     const message = {
         confirmDeleteNotice: "게시글을 삭제하시겠습니까?",
