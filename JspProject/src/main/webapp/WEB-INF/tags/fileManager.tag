@@ -56,6 +56,9 @@
 
     const setMaxFileCount = (count = 5) => {
         maxFileCount = count;
+
+        const fileCountElement = document.querySelector(".file-count");
+        fileCountElement.textContent = "(" + files.length + "/" + maxFileCount + ")";
     }
 
     const convertFileSize = (bytes) => {
