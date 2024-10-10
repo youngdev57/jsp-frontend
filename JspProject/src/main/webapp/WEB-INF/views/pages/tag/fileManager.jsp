@@ -46,25 +46,37 @@
     })
 
     const addEventChangeExtends = () => {
-        $('#fileManager input[type="checkbox"]').change(function () {
-            const extendNames = [];
-            $('#fileManager input[type="checkbox"]:checked').each(function () {
-                extendNames.push($(this).attr("id"));
-            })
-            const description = "허용된 파일 형식(" + extendNames.join(", ") +  ")만 업로드 가능합니다.";
-            $(".description1").text(description);
+        const checkboxes = document.querySelectorAll('#fileManager input[type="checkbox"]');
 
-            setAcceptFileManager(extendNames);
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener("change", () => {
+                const extendNames = [];
+
+                const checkedItems = document.querySelectorAll('#fileManager input[type="checkbox"]:checked');
+                checkedItems.forEach(item => extendNames.push(item.id));
+
+                const description = "허용된 파일 형식(" + extendNames.join(", ") +  ")만 업로드 가능합니다.";
+                const firstDescription = document.querySelector(".description1") || "";
+                firstDescription.textContent = description;
+
+                setAcceptFileManager(extendNames);
+            })
         })
     }
 
     const addEventChangeUpload = () => {
-        $('#fileManager input[type="radio"]').change(function () {
-            const maxCount = $('[name="maxCount"]:checked').attr("id").replace("file-", "");
-            setMaxFileCount(maxCount);
+        const radios = document.querySelectorAll('#fileManager input[type="radio"]');
+        radios.forEach(radio => {
+            radio.addEventListener("change", () => {
+                const selected = document.querySelector('[name="maxCount"]:checked');
+                const maxCount = selected.id.replace("file-", "");
 
-            const description = "최대 " + maxCount + "개까지 업로드 가능합니다.";
-            $(".description2").text(description);
+                setMaxFileCount(maxCount);
+
+                const description = "최대 " + maxCount + "개까지 업로드 가능합니다.";
+                const secondDescription = document.querySelector(".description2") || "";
+                secondDescription.textContent = description;
+            })
         })
     }
 
