@@ -224,18 +224,18 @@
         </div>
 
         <%-- Code Snippet Style --%>
-        <h4 class="sub-title">Code Snippet Style</h4>
-        <div class="sub-content">
-            <div class="code-snippet">
-                <p><span class="keyword">const</span> handleLoadProfile = () => {</p>
-                <p class="tab1"><span class="keyword">const</span> <span class="key">requestUrl</span> = &#x60;/users/$&#123;entity.entityId&#125;/profile&#x60;;</p>
-                <p class="tab1"><span class="keyword">const</span> <span class="key">requestData</span> = { ... };</p>
-                <br>
-                <p class="tab1"><span class="keyword">Api</span>.<span class="func">get</span>(requestUrl, requestData)</p>
-                <p class="tab2">.<span class="func">then</span>(response => console.<span class="func">log</span>(response))</p>
-                <p class="tab2">.<span class="func">catch</span>(error => <span class="func">handleServerErrorMessage</span>(error));</p>
-                <p>}</p>
-            </div>
+<%--        <h4 class="sub-title">Code Snippet Style</h4>--%>
+<%--        <div class="sub-content">--%>
+<%--            <div class="code-snippet">--%>
+<%--                <p><span class="keyword">const</span> handleLoadProfile = () => {</p>--%>
+<%--                <p class="tab1"><span class="keyword">const</span> <span class="key">requestUrl</span> = &#x60;/users/$&#123;entity.entityId&#125;/profile&#x60;;</p>--%>
+<%--                <p class="tab1"><span class="keyword">const</span> <span class="key">requestData</span> = { ... };</p>--%>
+<%--                <br>--%>
+<%--                <p class="tab1"><span class="keyword">Api</span>.<span class="func">get</span>(requestUrl, requestData)</p>--%>
+<%--                <p class="tab2">.<span class="func">then</span>(response => console.<span class="func">log</span>(response))</p>--%>
+<%--                <p class="tab2">.<span class="func">catch</span>(error => <span class="func">handleServerErrorMessage</span>(error));</p>--%>
+<%--                <p>}</p>--%>
+<%--            </div>--%>
         </div>
     </section>
 </div>
