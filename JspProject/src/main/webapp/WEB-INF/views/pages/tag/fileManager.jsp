@@ -71,7 +71,7 @@
                 const selected = document.querySelector('[name="maxCount"]:checked');
                 const maxCount = selected.id.replace("file-", "");
 
-                setMaxFileCount(maxCount);
+                setMaxFileCount(+maxCount);
 
                 const description = "최대 " + maxCount + "개까지 업로드 가능합니다.";
                 const secondDescription = document.querySelector(".description2") || "";
