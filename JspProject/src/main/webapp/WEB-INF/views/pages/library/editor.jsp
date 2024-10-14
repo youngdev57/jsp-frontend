@@ -15,8 +15,8 @@
 
 <script>
     let $editor = {
-        ck: $("#ckEditor").get(0),
-        toast: $("#toastEditor").get(0)
+        ck: document.getElementById("ckEditor"),
+        toast: document.getElementById("toastEditor")
     }
 
     const initializeEditor = () => {
