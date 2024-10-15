@@ -31,6 +31,7 @@
     <script src="${path}/resources/js/modules/api.module.js"></script>
     <script src="${path}/resources/js/modules/util.module.js"></script>
     <script src="${path}/resources/js/modules/pager.module.js"></script>
+    <script src="${path}/resources/js/modules/file-manager.module.js"></script>
 
     <link rel="stylesheet" href="${path}/resources/css/pages/modal.css">
     <link rel="stylesheet" href="${path}/resources/css/pages/sidebar.css">
@@ -72,6 +73,7 @@
             <ul class="sub-menu">
                 <li><a href="${path}/modules/api">Api</a></li>
                 <li><a href="${path}/modules/pager">Pager</a></li>
+                <li><a href="${path}/modules/file-manager">File Manager</a></li>
                 <li><a href="${path}/modules/region">Region</a></li>
             </ul>
         </li>
