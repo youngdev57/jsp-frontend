@@ -118,7 +118,7 @@ class FileManagerModule {
     handleRemoveAttachedFile = (e) => {
         let fileName = e.target.dataset.file || "";
 
-        const target = this.rootElement.querySelector(`input[value="${fileName}"]`).closest("div");
+        const target = this.rootElement.querySelector(`[data-name="${fileName}"]`).closest("div");
         if (target) {
             const foundIndex = this.files.findIndex(file => file.name === fileName);
             if (foundIndex > -1)
@@ -174,13 +174,27 @@ class FileManagerModule {
      * 파일 배열 기반으로 목록 요소를 생성하는 함수
      */
     renderFileList = () => {
+        function getReadableFileSizeString(fileSizeInBytes) {
+            let i = -1;
+            const byteUnits = [' kB', ' MB', ' GB', ' TB', 'PB', 'EB', 'ZB', 'YB'];
+            do {
+                fileSizeInBytes /= 1024;
+                i ++;
+            } while (fileSizeInBytes > 1024);
+
+            return Math.max(fileSizeInBytes, 0.1).toFixed(1) + byteUnits[i];
+        }
+
         let innerElement = "";
 
         this.files.forEach(file => {
             innerElement += `
-                <div style="position: relative">
-                    <input class="uploaded-file-name" value="${file.name}" disabled />
-                    <button type="button" class="btn-remove-attached" data-file="${file.name}"></button>
+                <div class="file-item-container" data-name="${file.name}">
+                    <div class="file-name flex gap-20"><span>💾</span>${file.name}</div>
+                    <div class="flex gap-20">
+                        <div class="file-size">${getReadableFileSizeString(file.size)}</div>
+                        <button type="button" class="btn-remove-attached" data-file="${file.name}"></button>
+                    </div>
                 </div>
             `
         })

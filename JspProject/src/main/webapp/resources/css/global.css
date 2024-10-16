@@ -974,15 +974,30 @@ h2.common-title {
     background: var(--white);
 }
 
+.file-manager .file-item-container {
+    display: flex;
+    width: 100%;
+    border: var(--border-default);
+    padding: 18px 20px;
+    border-radius: 5px;
+    background: var(--white);
+
+    & .file-size,
+    & .file-name {
+        line-height: 20px;
+        font-size: var(--font-basic);
+        color: #666;
+    }
+}
+
+.file-manager .file-item-container .file-name {
+    flex: 1;
+}
+
 .file-manager .btn-remove-attached {
-    position: absolute;
-    top: 20px;
-    right: 20px;
+    border: none;
     width: 16px !important;
     height: 16px;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
     background: url("../img/icon/icon-close-black.png") no-repeat 100% 100%;
 }
 
