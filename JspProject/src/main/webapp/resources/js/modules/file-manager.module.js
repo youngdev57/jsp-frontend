@@ -195,6 +195,15 @@ class FileManagerModule {
     }
 
     /**
+     * 첨부파일 최대 개수 설정
+     * @param maxCount
+     */
+    setMaxCount = (maxCount = 5) => {
+        this.maxCount = maxCount;
+        this.rootElement.querySelector(".file-count").textContent = `(${this.files.length}/${this.maxCount})`;
+    }
+
+    /**
      * 파일매니저의 허용 확장자를 지정하는 함수
      * @param accepts
      */
