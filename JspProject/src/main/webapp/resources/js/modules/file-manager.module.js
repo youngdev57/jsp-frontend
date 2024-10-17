@@ -60,7 +60,7 @@ class FileManagerModule {
      */
     initialize = (target, descriptions = [], fileOptions = {}) => {
         if (!this.id)
-            throw new Error("invalid file-manager id.")
+            throw new Error("invalid file-manager id.");
 
         target.innerHTML = this.makeFileContainer(descriptions, fileOptions);
 
@@ -69,9 +69,8 @@ class FileManagerModule {
         this.rootElement = document.getElementById(`file-manager-${this.id}`);
     }
 
-    makeFileContainer = (descriptions, fileOptions = {
-        disabled: "disabled"
-    }) => {
+    makeFileContainer = (descriptions, options) => {
+        const fileOptions = options ?? { disabled: "disabled" };
         const { disabled } = fileOptions;
 
         let container = "";
@@ -99,8 +98,8 @@ class FileManagerModule {
     }
 
     handleChangeFiles = () => {
-        const target = document.getElementById(`file-${this.id}`);
-        const newFiles = Array.from(target.files);
+        const targetElement = document.getElementById(`file-${this.id}`);
+        const newFiles = Array.from(targetElement.files);
 
         if ((this.files.length + newFiles.length) > this.maxCount)
             return alert(`최대 ${this.maxCount}까지 등록 가능합니다.`);
@@ -116,7 +115,7 @@ class FileManagerModule {
      * 목록 내 파일 제거 함수
      */
     handleRemoveAttachedFile = (e) => {
-        let fileName = e.target.dataset.file || "";
+        let fileName = e.target.dataset.file ?? "";
 
         const target = this.rootElement.querySelector(`[data-name="${fileName}"]`).closest("div");
         if (target) {
@@ -164,7 +163,9 @@ class FileManagerModule {
 
         this.files.forEach(file => {
             const isOriginFile = file.id && file.id > 0;
-            isOriginFile ? processed.originFiles.push(file.id) : processed.newFiles.push(file);
+            isOriginFile
+                ? processed.originFiles.push(file.id)
+                : processed.newFiles.push(file);
         })
 
         return processed;
@@ -176,7 +177,7 @@ class FileManagerModule {
     renderFileList = () => {
         function getReadableFileSizeString(fileSizeInBytes) {
             let i = -1;
-            const byteUnits = [' kB', ' MB', ' GB', ' TB', 'PB', 'EB', 'ZB', 'YB'];
+            const byteUnits = ["kB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
             do {
                 fileSizeInBytes /= 1024;
                 i ++;
