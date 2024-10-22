@@ -190,7 +190,12 @@ function getReversedCommonCode(value = "") {
  * @param responseType
  * @returns {Promise<void>}
  */
-async function downloadAuthorizedFile(fileName = "", { downloadURL = "", requestParam, responseType}) {
+async function downloadAuthorizedFile(fileName = "file", { downloadURL = "", requestParam, responseType}) {
+    function checkIncludeExtension(fileName) {
+        const regex = /\.[0-9a-z]+$/i;
+        return regex.test(fileName);
+    }
+
     if (!downloadURL)
         throw new Error("Cannot found download URL.");
 
@@ -198,10 +203,17 @@ async function downloadAuthorizedFile(fileName = "", { downloadURL = "", request
     if (!response || !response.data)
         throw new Error("Fail download file.");
 
+    let fullFileName = fileName;
+    if (!checkIncludeExtension(fileName)) {
+        const contentType = response.data.type;
+        const extension = contentType.split("/")[1];
+        fullFileName = extension ? `${fileName}.${extension}` : fileName;
+    }
+
     const fileURL = URL.createObjectURL(response.data);
     const a = document.createElement("a");
     a.href = fileURL;
-    a.download = fileName || "";
+    a.download = fullFileName;
     document.body.appendChild(a);
     a.click();
 
