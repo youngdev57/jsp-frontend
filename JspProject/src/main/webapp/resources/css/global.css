@@ -1015,6 +1015,7 @@ h2.common-title {
     color: var(--white);
 }
 
+.thumbnail-manager label,
 .file-manager label {
     width: 240px;
     height: 60px;
@@ -1037,11 +1038,13 @@ h2.common-title {
     background: #6A7888;
 }
 
+.thumbnail-manager label::before,
 .file-manager label::before {
     margin-top: 2px;
     content: url("../img/icon/icon-attached-file.png");
 }
 
+.thumbnail-manager input[type="file"],
 .file-manager input[type="file"] {
     position: absolute;
     width: 0;
@@ -1051,16 +1054,20 @@ h2.common-title {
     border: 0;
 }
 
+.thumbnail-manager .description,
 .file-manager .description {
     width: calc(100% - 260px);
     border-radius: 10px;
 }
 
+.thumbnail-manager .description ul,
 .file-manager .description ul {
     line-height: 1.8;
     margin: 0;
 }
 
+.thumbnail-manager .description li,
+.thumbnail-manager .description p,
 .file-manager .description li,
 .file-manager .description p {
     list-style: disc;
@@ -1076,6 +1083,34 @@ h2.common-title {
     height: 40px;
     background: transparent url("../img/icon/icon-file.svg") center center no-repeat;
     background-size: 40% 40%;
+}
+
+.thumbnail-manager .thumbnail-container {
+    display: flex;
+    gap: 10px;
+}
+.thumbnail-manager .thumbnail-wrapper {
+    border: var(--border-default);
+    /*padding: 10px 10px 30px 10px;*/
+    border-radius: 5px;
+    position: relative;
+    width: 250px;
+    height: 150px;
+}
+.thumbnail-manager .thumbnail-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.thumbnail-manager .thumbnail-wrapper .thumbnail-name {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    padding: 7px;
+    font-size: 14px;
+    color: var(--white-color);
+    background: rgba(0, 0, 0, 0.5);
 }
 
 
