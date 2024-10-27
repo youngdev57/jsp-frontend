@@ -1002,8 +1002,17 @@ h2.common-title {
     flex: 1;
 }
 
-.file-manager .btn-remove-attached,
+.file-manager .btn-remove-attached {
+    border: none;
+    width: 16px !important;
+    height: 16px;
+    background: url("../img/icon/icon-close-black.png") no-repeat 100% 100%;
+}
+
 .thumbnail-manager .btn-remove-attached {
+    position: absolute;
+    top: 10px;
+    right: 10px;
     border: none;
     width: 16px !important;
     height: 16px;
@@ -1109,7 +1118,7 @@ h2.common-title {
     bottom: 0;
     padding: 7px;
     font-size: 14px;
-    color: var(--white-color);
+    color: var(--white);
     background: rgba(0, 0, 0, 0.5);
 }
 
@@ -1165,11 +1174,6 @@ h2.common-title {
     & > a {
         font-size: var(--font-basic);
     }
-}
-.guide-container button[data-type="small"] {
-    width: fit-content;
-    height: 40px;
-    padding: 0 10px;
 }
 .code-snippet {
     display: flex;
