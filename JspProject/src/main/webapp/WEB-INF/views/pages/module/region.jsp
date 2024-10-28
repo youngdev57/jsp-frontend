@@ -7,7 +7,7 @@
     <t:filePath dir1="resources" dir2="js" dir3="region.js" />
 
     <div class="button-control-wrapper">
-        <button type="button" class="" data-type="small" onclick="generateSidos()">시/도 바인딩</button>
+        <button type="button" onclick="generateSidos()">시/도 바인딩</button>
     </div>
 
     <div class="flex gap-20 mt-40">
