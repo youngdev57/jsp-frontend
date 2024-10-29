@@ -79,7 +79,7 @@ class ThumbnailManagerModule {
             <div id="thumbnail-manager-${this.id}" class="thumbnail-manager flex-column">
                 <div class="flex gap-20">
                     <label for="thumbnail-${this.id}">파일 선택</label>
-                    <input id="thumbnail-${this.id}" type="file" accept="" multiple ${disabled} />
+                    <input id="thumbnail-${this.id}" type="file" accept="" ${disabled} />
                     <div class="thumbnail-container"></div>
                 </div>
                 <div class="description">
