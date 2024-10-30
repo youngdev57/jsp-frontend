@@ -23,12 +23,13 @@
 
     document.addEventListener("DOMContentLoaded", function () {
         initializeThumbnailManager();
+        addEventChangeExtends();
     })
 
     const initializeThumbnailManager = () => {
         const descriptions = [ "허용된 파일 형식(png, jpg)만 업로드 가능합니다." ];
 
-        thumbnailManager = new ThumbnailManagerModule("file-manager");
+        thumbnailManager = new ThumbnailManagerModule("thumbnail-manager");
         const thumbnailManagerContainer = document.querySelector(".thumbnail-manager-container");
         thumbnailManager.initialize(thumbnailManagerContainer, descriptions);
 
@@ -37,6 +38,32 @@
 
         thumbnailManager.callbackChange = callbackChangeFile;
         thumbnailManager.callbackRemove = callbackRemoveFile;
+    }
+
+    const addEventChangeExtends = () => {
+        const checkboxes = document.querySelectorAll('#thumbnailManager input[type="checkbox"]');
+
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener("change", () => {
+                const extendNames = [];
+
+                const checkedItems = document.querySelectorAll('#thumbnailManager input[type="checkbox"]:checked');
+                checkedItems.forEach(item => extendNames.push(item.id));
+
+                const isAcceptAll = checkedItems.length === 0;
+                const description = isAcceptAll
+                    ? "※ 모든 파일 형식으로 업로드 가능합니다."
+                    : "※ 허용된 파일 형식(" + extendNames.join(", ") +  ")만 업로드 가능합니다.";
+                const firstDescription = document.querySelector(".description > ul > li") || "";
+                firstDescription.textContent = description;
+
+                thumbnailManager.setAcceptThumbnailManager(extendNames);
+            })
+        })
+    }
+
+    const bindThumbnail = () => {
+        console.log("bindThumbnail")
     }
 
     const callbackChangeFile = () => {
