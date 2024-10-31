@@ -1011,12 +1011,13 @@ h2.common-title {
 
 .thumbnail-manager .btn-remove-attached {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    bottom: 5px;
+    right: 5px;
     border: none;
-    width: 16px !important;
-    height: 16px;
-    background: url("../img/icon/icon-close-black.png") no-repeat 100% 100%;
+    width: 20px;
+    height: 20px;
+    background: url("../img/icon/icon-close-white.svg") no-repeat 100% 100%;
+    z-index: 99;
 }
 
 .file-manager .file-count {
@@ -1116,7 +1117,7 @@ h2.common-title {
     width: 100%;
     left: 0;
     bottom: 0;
-    padding: 7px;
+    padding: 7px 30px 7px 7px;
     font-size: 14px;
     color: var(--white);
     background: rgba(0, 0, 0, 0.5);
