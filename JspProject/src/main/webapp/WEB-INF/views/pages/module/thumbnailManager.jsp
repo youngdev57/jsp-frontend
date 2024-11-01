@@ -14,6 +14,12 @@
                 <label for="jpg"><input id="jpg" type="checkbox" checked />jpg</label>
             </div>
         </div>
+        <div>
+            <div class="column-header">데이터 바인딩</div>
+            <div class="column-content">
+                <button type="button" onclick="bindThumbnail()">바인딩</button>
+            </div>
+        </div>
     </div>
     <div class="mt-40 thumbnail-manager-container"></div>
 </div>
@@ -63,7 +69,8 @@
     }
 
     const bindThumbnail = () => {
-        console.log("bindThumbnail")
+        const url = "https://tistory1.daumcdn.net/tistory/3580603/attach/9391cebe1d374f5c9b5d1f257b4aedf8"; // 외부 URL
+        thumbnailManager.setOriginThumbnail(url);
     }
 
     const callbackChangeFile = () => {
