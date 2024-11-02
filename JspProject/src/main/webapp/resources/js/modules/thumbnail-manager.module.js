@@ -171,6 +171,7 @@ class ThumbnailManagerModule {
             <div class="thumbnail-wrapper">
                 <img src="${this.thumbnail}" alt="이미지" />
                 <button type="button" class="btn-remove-attached"></button>
+                <div class="thumbnail-name ellipsis">임시 이미지</div>
             </div>
         `
 
