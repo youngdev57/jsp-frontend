@@ -81,18 +81,6 @@
             <div class="icon-link">
                 <a href="#">
                     <i class="bx bx-grid-alt"></i>
-                    <span class="link-name">Tags</span>
-                </a>
-                <i class="bx bxs-chevron-down arrow"></i>
-            </div>
-            <ul class="sub-menu">
-                <li><a href="${path}/tags/fileManager">File Manager</a></li>
-            </ul>
-        </li>
-        <li>
-            <div class="icon-link">
-                <a href="#">
-                    <i class="bx bx-grid-alt"></i>
                     <span class="link-name">Common</span>
                 </a>
                 <i class="bx bxs-chevron-down arrow"></i>
