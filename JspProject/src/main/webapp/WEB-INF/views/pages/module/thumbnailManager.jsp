@@ -69,8 +69,11 @@
     }
 
     const bindThumbnail = () => {
-        const url = "https://tistory1.daumcdn.net/tistory/3580603/attach/9391cebe1d374f5c9b5d1f257b4aedf8"; // 외부 URL
-        thumbnailManager.setOriginThumbnail(url);
+        const entity = {
+            name: "테스트_썸네일.png",
+            url: "https://tistory1.daumcdn.net/tistory/3580603/attach/9391cebe1d374f5c9b5d1f257b4aedf8" // 외부 URL
+        }
+        thumbnailManager.setOriginThumbnail(entity);
     }
 
     const callbackChangeFile = () => {

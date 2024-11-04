@@ -169,9 +169,9 @@ class ThumbnailManagerModule {
 
         innerElement += `
             <div class="thumbnail-wrapper">
-                <img src="${this.thumbnail}" alt="이미지" />
+                <img src="${this.thumbnail.url}" alt="${this.thumbnail.name || "임시"} 이미지" />
                 <button type="button" class="btn-remove-attached"></button>
-                <div class="thumbnail-name ellipsis">임시 이미지</div>
+                <div class="thumbnail-name ellipsis">${this.thumbnail.name || "임시 이미지"}</div>
             </div>
         `
 
