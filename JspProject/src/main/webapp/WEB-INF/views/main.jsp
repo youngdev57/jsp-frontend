@@ -10,14 +10,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>youngdev</title>
 
-    <%-- libs --%>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.10/dayjs.min.js"></script>
-
-    <%-- sweetalert --%>
-<%--    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.7/dist/sweetalert2.min.css" rel="stylesheet">--%>
-<%--    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.7/dist/sweetalert2.all.min.js"></script>--%>
-
     <%-- jquery --%>
     <link rel="stylesheet" href="${path}/resources/libs/jquery/jquery-ui.min.css" />
     <script src="${path}/resources/libs/jquery/jquery-3.7.0.min.js"></script>
@@ -38,17 +30,9 @@
     <link rel="stylesheet" href="${path}/resources/css/pages/sidebar.css">
     <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet">
 
-    <%-- ckeditor5 --%>
-<%--    <script src="${path}/resources/libs/ckeditor/ckeditor.js"></script>--%>
-
     <script>
         const Api = new ApiModule();
         const Pager = new PagerModule();
-        // const Editor = ClassicEditor;
-
-        // const _alert = Swal;
-        // const _ckEditor = ClassicEditor;
-        // let _toastEditor;
     </script>
 </head>
 <body>
@@ -107,22 +91,6 @@
                 <li><a href="#">Form</a></li>
             </ul>
         </li>
-<%--        <li>--%>
-<%--            <div class="icon-link">--%>
-<%--                <a href="#">--%>
-<%--                    <i class="bx bx-book"></i>--%>
-<%--                    <span class="link-name">Libraries</span>--%>
-<%--                </a>--%>
-<%--                <i class="bx bxs-chevron-down arrow"></i>--%>
-<%--            </div>--%>
-<%--            <ul class="sub-menu">--%>
-<%--                <li><a href="${path}/libraries/alert">Alert</a></li>--%>
-<%--                <li><a href="${path}/libraries/editor">Editor</a></li>--%>
-<%--                <li><a href="${path}/libraries/grid">Grid</a></li>--%>
-<%--                <li><a href="${path}/libraries/chart">Chart</a></li>--%>
-<%--                <li><a href="${path}/libraries/calendar">Calendar</a></li>--%>
-<%--            </ul>--%>
-<%--        </li>--%>
     </ul>
 </div>
 <section id="main" class="home-section">

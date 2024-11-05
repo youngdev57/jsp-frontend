@@ -21,13 +21,6 @@ public class JspController {
         return "main";
     }
 
-    @GetMapping("/libraries/{page}")
-    public String Libraries(Model model, @PathVariable String page) {
-        String converted = service.convertPageName(page);
-        model.addAttribute("page", "pages/library/" + converted + ".jsp");
-        return "main";
-    }
-
     @GetMapping("/modules/{page}")
     public String Modules(Model model, @PathVariable String page) {
         String converted = service.convertPageName(page);
