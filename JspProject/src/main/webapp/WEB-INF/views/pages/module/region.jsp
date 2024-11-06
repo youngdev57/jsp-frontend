@@ -23,6 +23,11 @@
 </div>
 
 <script>
+    document.addEventListener("DOMContentLoaded", async function () {
+        const regions = await getAllRegionData();
+        console.log(regions);
+    })
+
     const generateSidos = () => {
         const sigunguElement = document.getElementById("sigungu");
         sigunguElement.innerHTML = "";

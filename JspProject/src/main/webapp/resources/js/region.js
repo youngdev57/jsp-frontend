@@ -1201,3 +1201,17 @@ function findSigunguNameByCodes(code = "", sidoCode = "") {
     const foundSigungu = foundSido.sigungu.find(item => item.code === parseInt(code));
     return foundSigungu.name || "";
 }
+
+/**
+ * 지역 JSON 데이터를 가져오는 함수
+ * @returns {Promise<any|null>}
+ */
+async function getAllRegionData() {
+    try {
+        const response = await fetch("/resources/json/region.json");
+        return await response.json();
+    } catch (error) {
+        console.error(error);
+        return null;
+    }
+}
