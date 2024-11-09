@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="${path}/resources/css/reset.css"/>
     <link rel="stylesheet" href="${path}/resources/css/global.css"/>
     <script src="${path}/resources/js/constants.js"></script>
-    <script src="${path}/resources/js/region.js"></script>
+    <script src="${path}/resources/js/modules/region.module.js"></script>
     <script src="${path}/resources/js/modules/api.module.js"></script>
     <script src="${path}/resources/js/modules/util.module.js"></script>
     <script src="${path}/resources/js/modules/pager.module.js"></script>

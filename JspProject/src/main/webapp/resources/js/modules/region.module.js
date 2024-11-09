@@ -84,7 +84,8 @@ class RegionModule {
      */
     loadRegionJsonData = async () => {
         try {
-            const response = await fetch("../../../../resources/js/config/region.json");
+            const response = await fetch("../../../../resources/json/region.json");
+            console.log(response);
             return await response.json();
         } catch (error) {
             console.error(error);
