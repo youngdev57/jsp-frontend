@@ -122,13 +122,12 @@ function generateHTMLFromEditor(content = "", fileName = "") {
  */
 function getPlainTextFromHTML(html = "") {
     const parser = new DOMParser();
-    const doc = parser.parseFromString(html, 'text/html');
-    let allText = "";
-    const textNodes = doc.createTreeWalker(doc.body, NodeFilter.SHOW_TEXT);
-    while (textNode = textNodes.nextNode()) {
-        allText += textNode.nodeValue.trim() + ' ';
-    }
-    return allText;
+    const doc = parser.parseFromString(html, "text/html");
+
+    if (!doc || doc.querySelector("parsererror"))
+        return "";
+
+    return doc.body.innerText.trim();
 }
 
 /**
