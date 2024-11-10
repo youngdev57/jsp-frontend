@@ -4,7 +4,7 @@
 <div id="region" class="guide-container">
     <t:information title="Region" parentDir="Modules" />
     <t:callout description="지역 정보 데이터를 가공하는 모듈입니다." />
-    <t:filePath dir1="resources" dir2="js" dir3="region.js" />
+    <t:filePath dir1="resources" dir2="js" dir3="modules" dir4="region.module.js" />
 
     <div class="button-control-wrapper gap-20">
         <button type="button" onclick="generateSidos()">시/도 바인딩</button>
