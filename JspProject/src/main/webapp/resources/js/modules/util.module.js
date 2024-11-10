@@ -204,9 +204,10 @@ async function downloadAuthorizedFile(fileName = "file", { downloadURL = "", req
 
     let fullFileName = fileName;
     if (!checkIncludeExtension(fileName)) {
+        const defaultExtension = "txt";
         const contentType = response.data.type;
-        const extension = contentType.split("/")[1];
-        fullFileName = extension ? `${fileName}.${extension}` : fileName;
+        const extension = contentType.split("/")[1] || defaultExtension;
+        fullFileName = `${fileName}.${extension}`;
     }
 
     const fileURL = URL.createObjectURL(response.data);
