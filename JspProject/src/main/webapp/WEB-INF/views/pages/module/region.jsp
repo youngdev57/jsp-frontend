@@ -62,7 +62,8 @@
     }
 
     const getSelectedAddress = () => {
-        console.log(regionModule.getFullAddressName());
+        const address = regionModule.getFullAddressName();
+        document.querySelector(".address-text").textContent = address.convertedName;
     }
 
     const generateSidos = () => {
