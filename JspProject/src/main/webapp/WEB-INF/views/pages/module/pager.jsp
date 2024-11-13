@@ -40,14 +40,13 @@
     });
 
     const handleAddInnerButton = () => {
-        const buttonElement = `
-            <button data-type="small" onclick="handleDeleteChecked()">선택 삭제</button>
+        document.getElementById("sec-button").innerHTML = `
+            <button type="button" onclick="handleDeleteChecked()">선택 삭제</button>
         `;
-        $("#sec-button").html(buttonElement);
     }
 
     const handleLoad = (pageIndex = 1) => {
-        console.log("[module/api.jsp] called by handleLoad.")
+        console.log("[module/pager.jsp] called by handleLoad.")
 
         const requestParam = {
             sortColumn: "",
@@ -73,24 +72,29 @@
                 Pager.setPagerHeader(headers);
 
                 const entities = response.data.data.list;
-                const contentElement = $(".pager-content");
-                contentElement.empty();
+                const contentElement = document.querySelector(".pager-content");
+                contentElement.innerHTML = "";
 
+                let innerElement = "";
                 entities.forEach(entity => {
                     const detailPageUrl = `/${'${REQUEST_URL}'}/${'${entity.id}'}`;
                     
-                    const checkEach = `<input id="${"chk-${entity.id}"}" type="checkbox" data-type="each" data-eid="${"${entity.id}"}" />`;
-                    let childElement = `<tr id="${"row-${entity.id}"}"><td>${"${checkEach}"}</td><td>${"${entity.no}"}</td>`;
+                    const checkEach = `<input id="chk-\${entity.id}" type="checkbox" data-type="each" data-eid="\${entity.id}" />`;
+                    let childElement = `
+                        <tr id="row-\${entity.id}">
+                            <td>\${checkEach}</td>
+                            <td>\${entity.no}</td>`;
                     childElement +=`
                             <td class="ellipsis title">
-                                <a href="${'${detailPageUrl}'}" title="${"${entity.title}"}">
-                                    ${"${entity.title || ''}"}
+                                <a href="\${detailPageUrl}" title="\${entity.title}">
+                                    \${entity.title || ''}
                                 </a>
                             </td>
-                            <td>${"${entity.writeDate || ''}"}</td>
-                            <td>${"${entity.modifyDate || ''}"}</td>
-                            <td>${"${'관리자'}"}</td>
-                            <td>${"${entity.views || 0}"}</td>
+                            <td>\${entity.writeDate || ''}</td>
+                            <td>\${entity.modifyDate || ''}</td>
+                            <td>관리자</td>
+                            <td>\${entity.views || 0}</td>`
+                    childElement +=`
                             <td class="action-button-wrapper">
                                 <button data-type="small" onclick="handleToggleContextMenu(${"${entity.id}"})">···</button>
                                 <div class="context-menu">
@@ -102,11 +106,13 @@
                         </tr>
                     `;
 
-                    contentElement.append(childElement);
+                    innerElement += childElement;
                 });
 
-                const checkedAll = $(`input[data-type="all"]`);
-                checkedAll.on("click", function () {
+                contentElement.innerHTML = innerElement;
+
+                const checkedAll = document.querySelector(`input[data-type="all"]`);
+                checkedAll.addEventListener("click", function () {
                     toggleCheckedAll($(this));
                 });
             })
