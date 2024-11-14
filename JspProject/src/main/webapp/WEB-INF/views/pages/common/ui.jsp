@@ -149,12 +149,12 @@
                     </label>
                 </div>
                 <div class="flex-center-vertical gap-30" style="height: 50px">
-                    <select id="select">
+                    <select id="select1">
                         <option disabled selected style="display: none">전체 선택</option>
                         <option value="select01">선택1</option>
                         <option value="select02">선택2</option>
                     </select>
-                    <select id="select" disabled>
+                    <select id="select2" disabled>
                         <option disabled selected style="display: none">전체 선택 (Disabled)</option>
                         <option value="select01">선택1</option>
                         <option value="select02">선택2</option>
@@ -221,21 +221,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-
-        <%-- Code Snippet Style --%>
-<%--        <h4 class="sub-title">Code Snippet Style</h4>--%>
-<%--        <div class="sub-content">--%>
-<%--            <div class="code-snippet">--%>
-<%--                <p><span class="keyword">const</span> handleLoadProfile = () => {</p>--%>
-<%--                <p class="tab1"><span class="keyword">const</span> <span class="key">requestUrl</span> = &#x60;/users/$&#123;entity.entityId&#125;/profile&#x60;;</p>--%>
-<%--                <p class="tab1"><span class="keyword">const</span> <span class="key">requestData</span> = { ... };</p>--%>
-<%--                <br>--%>
-<%--                <p class="tab1"><span class="keyword">Api</span>.<span class="func">get</span>(requestUrl, requestData)</p>--%>
-<%--                <p class="tab2">.<span class="func">then</span>(response => console.<span class="func">log</span>(response))</p>--%>
-<%--                <p class="tab2">.<span class="func">catch</span>(error => <span class="func">handleServerErrorMessage</span>(error));</p>--%>
-<%--                <p>}</p>--%>
-<%--            </div>--%>
         </div>
     </section>
 </div>
