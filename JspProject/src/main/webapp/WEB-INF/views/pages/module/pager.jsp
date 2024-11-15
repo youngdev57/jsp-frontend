@@ -113,17 +113,20 @@
 
                 const checkedAll = document.querySelector(`input[data-type="all"]`);
                 checkedAll.addEventListener("click", function () {
-                    toggleCheckedAll($(this));
+                    toggleCheckedAll(this);
                 });
             })
             .catch(error => handleServerErrorMessage(error));
     }
 
     const toggleCheckedAll = (target) => {
-        const isChecked = target.prop("checked");
-        const checkboxes = $(`input[data-type="each"]`);
-        checkboxes.prop("checked", isChecked);
-    }
+        const isChecked = target.checked;
+        const checkboxes = document.querySelectorAll('input[data-type="each"]');
+
+        checkboxes.forEach(checkbox => {
+            checkbox.checked = isChecked;
+        });
+    };
 
     const handleDeleteEntity = (entityId = -1) => {
         if (!confirm(message.confirmDeleteNotice))
@@ -153,25 +156,33 @@
     }
 
     const handleDeleteChecked = () => {
-        const checkboxes = $(`input[data-type="each"]`);
+        const checkboxes = document.querySelectorAll('input[data-type="each"]');
         const entityIds = [];
-        checkboxes.each(function () {
-            if ($(this).prop("checked"))
-                entityIds.push($(this).data("eid"));
+
+        checkboxes.forEach(checkbox => {
+            if (checkbox.checked)
+                entityIds.push(checkbox.dataset.eid);
         });
 
         handleDeleteEntitys(entityIds);
-    }
+    };
 
     const handleToggleContextMenu = (entityId = -1) => {
-        const contextMenu = $("tr#row-" + entityId + " .context-menu");
-        $(".pager-content tr").each(function () {
-            const rowEntityId = $(this).attr("id").replace("row-", "");
-            if (entityId !== parseInt(rowEntityId))
-                $(this).find(".context-menu").css("display", "none");
+        const contextMenu = document.querySelector(`tr#row-\${entityId} .context-menu`);
+        const rows = document.querySelectorAll(".pager-content tr");
+
+        rows.forEach(row => {
+            const rowEntityId = row.id.replace("row-", "");
+            if (entityId !== parseInt(rowEntityId)) {
+                const menu = row.querySelector(".context-menu");
+                if (menu)
+                    menu.style.display = "none";
+            }
         });
 
-        const isDisplayed = contextMenu.css("display") === "flex";
-        contextMenu.css("display", isDisplayed ? "none" : "flex");
-    }
+        if (contextMenu) {
+            const isDisplayed = contextMenu.style.display === "flex";
+            contextMenu.style.display = isDisplayed ? "none" : "flex";
+        }
+    };
 </script>
