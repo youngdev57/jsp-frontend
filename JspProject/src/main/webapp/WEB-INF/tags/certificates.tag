@@ -24,31 +24,33 @@
 
         certificates.forEach((item, index) => {
             generateCertificate(index, certificates.length);
-            const target = $("#certificates #" + index);
-            target.find(".certificateType").val(getReversedCommonCode(item.certificateType));
-            target.find(".certificateName").val(item.certificateName);
-            target.find(".issuingAuthority").val(item.issuingAuthority);
-            target.find(".issuedDate").val(item.issuedDate);
+            const target = document.querySelector("#certificates #" + index);
+            target.querySelector(".certificateType").value = getReversedCommonCode(item.certificateType);
+            target.querySelector(".certificateName").value = item.certificateName;
+            target.querySelector(".issuingAuthority").value = item.issuingAuthority;
+            target.querySelector(".issuedDate").value = item.issuedDate;
         })
     }
 
     const getCertificates = () => {
-        const rows = $("#certificates div[data-type='row']");
+        const rows = document.querySelectorAll("#certificates div[data-type='row']");
         const certificates = [];
-        rows.each(function () {
+
+        rows.forEach(row => {
             const certificate = {
-                certificateType: $(this).find(".certificateType") ? $(this).find(".certificateType").val() : "",
-                certificateName: $(this).find(".certificateName") ? $(this).find(".certificateName").val() : "",
-                issuingAuthority: $(this).find(".issuingAuthority") ? $(this).find(".issuingAuthority").val() : "",
-                issuedDate: $(this).find(".issuedDate") ? $(this).find(".issuedDate").val() : "",
-            }
+                certificateType: row.querySelector(".certificateType") ? row.querySelector(".certificateType").value : "",
+                certificateName: row.querySelector(".certificateName") ? row.querySelector(".certificateName").value : "",
+                issuingAuthority: row.querySelector(".issuingAuthority") ? row.querySelector(".issuingAuthority").value : "",
+                issuedDate: row.querySelector(".issuedDate") ? row.querySelector(".issuedDate").value : "",
+            };
 
             const isEmpty = Object.values(certificate).every(value => value === "");
             if (!isEmpty)
                 certificates.push(certificate);
-        })
+        });
+
         return certificates;
-    }
+    };
 
     const getCertificateTypeElement = () => {
         let selectElement = `
@@ -100,7 +102,7 @@
     }
 
     const generateCertificate = (rowIndex = -1, rowLength) => {
-        const target = $("#certificates");
+        const target = document.getElementById("certificates");
 
         const rowElement = getCertificateRowElement(rowIndex, rowLength);
         rowIndex ? target.append(rowElement) : target.html(rowElement);
@@ -109,55 +111,54 @@
     }
 
     const sortCertificateOrder = () => {
-        const container = $("#certificates");
-        const children = container.children();
+        const container = document.querySelector("#certificates");
+        const children = Array.from(container.children);
 
-        children.each(function (index) {
-            $(this).attr("data-order", index);
-            const buttonWrapper = $(this).find(".btn-wrapper");
+        children.forEach((child, index) => {
+            child.setAttribute("data-order", index.toString());
 
+            const buttonWrapper = child.querySelector(".btn-wrapper");
             const isLast = index === children.length - 1;
             const buttonElement = isLast && children.length < 10 ?
                 `<button class="add-btn"></button>` : `<button class="delete-btn"></button>`;
 
-            buttonWrapper.html(buttonElement);
+            if (buttonWrapper)
+                buttonWrapper.innerHTML = buttonElement;
         });
 
         handleCertificateButtonEvents();
-    }
+    };
 
     const handleCertificateButtonEvents = () => {
-        const addButton = $("#certificates .add-btn");
-        const deleteButton = $("#certificates .delete-btn");
+        const addButton = document.querySelector("#certificates .add-btn");
+        const deleteButton = document.querySelector("#certificates .delete-btn");
 
         if (addButton)
-            addButton.on("click", function () {
+            addButton.addEventListener("click", function () {
                 addCertificateRow(this);
             });
 
         if (deleteButton)
-            deleteButton.on("click", function () {
+            deleteButton.addEventListener("click", function () {
                 deleteCertificateRow(this);
             });
-    }
+    };
 
     const deleteCertificateRow = (element) => {
         if (!element)
             return;
 
         const row = element.closest(`[data-type="row"]`);
-        row.remove();
+        if (row)
+            row.remove();
 
         sortCertificateOrder();
-    }
+    };
 
     const addCertificateRow = () => {
-        const container = $("#certificates");
-        // const children = container.children();
-
-        const rowElement = getCertificateRowElement();
-        container.append(rowElement);
+        const container = document.querySelector("#certificates");
+        container.innerHTML = getCertificateRowElement();
 
         sortCertificateOrder();
-    }
+    };
 </script>

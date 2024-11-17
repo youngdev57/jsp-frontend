@@ -74,7 +74,7 @@
 
     /**
      * 서치바에 설정된 query parameter 값을 받아오는 함수
-     * @returns {{searchColumn: (*|string|jQuery), searchKeyword: (*|string|jQuery)}}
+     * @returns {{}}
      */
     const getSearchParameter = () => {
         const result = {};
