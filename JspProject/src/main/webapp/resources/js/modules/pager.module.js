@@ -28,48 +28,41 @@ class PagerModule {
     }
 
     clear() {
-        $(".pager-header").empty();
-        $(".pager-indicator").empty();
+        const pagerHeader = document.querySelector(".pager-header");
+        const pagerIndicator = document.querySelector(".pager-indicator");
+
+        if (pagerHeader)
+            pagerHeader.innerHTML = "";
+        if (pagerIndicator)
+            pagerIndicator.innerHTML = "";
+
         this.loader = null;
     }
 
     initialize() {
         this.clear();
-        const indicatorElement = $(".pager-indicator");
+        const indicatorElement = document.querySelector(".pager-indicator");
 
         let indicators = ``;
-        // this.calculateRange(this.currentPage);
+        indicators += this.switchButton(IndicatorButtonType.FIRST, {
+            isActive: !this.isFirstPage
+        });
+        indicators += this.switchButton(IndicatorButtonType.PREV, {
+            isActive: !this.isFirstPage
+        });
 
-        // if (this.currentPage - 1 > 4) {
-            indicators += this.switchButton(IndicatorButtonType.FIRST, {
-                isActive: !this.isFirstPage
-            });
-            indicators += this.switchButton(IndicatorButtonType.PREV, {
-                isActive: !this.isFirstPage
-            });
-        // }
-
-        const endIndex = Math.min(this.totalPages, this.maxNumber);
-        // for (let index = this.minNumber; index <= endIndex; index ++) {
         for (let index = this.minNumber; index <= this.minNumber + 9; index ++) {
             indicators += index <= this.totalPages
                 ? this.switchButton(IndicatorButtonType.INDEX, { index: index })
                 : this.switchButton(IndicatorButtonType.INDEX, { index: index, isOverPage: true });
         }
 
-        // const lastPageBlockNumber =
-        //     this.totalPages % 5 === 0
-        //         ? this.totalPages - 4
-        //         : this.totalPages - (this.totalPages % 5) + 1;
-
-        // if (lastPageBlockNumber > this.currentPage) {
-            indicators += this.switchButton(IndicatorButtonType.NEXT, {
-                isActive: !this.isLastPage
-            });
-            indicators += this.switchButton(IndicatorButtonType.LAST, {
-                isActive: !this.isLastPage
-            });
-        // }
+        indicators += this.switchButton(IndicatorButtonType.NEXT, {
+            isActive: !this.isLastPage
+        });
+        indicators += this.switchButton(IndicatorButtonType.LAST, {
+            isActive: !this.isLastPage
+        });
 
         if (this.actionIndicator) {
             const opened = `<div class="pager-button-wrapper">`;
@@ -77,8 +70,11 @@ class PagerModule {
             indicators += opened + this.actionIndicator.join() + closed;
         }
 
-        indicatorElement.empty();
-        indicatorElement.append(indicators);
+        if (indicatorElement) {
+            indicatorElement.innerHTML = "";
+            indicatorElement.insertAdjacentHTML("beforeend", indicators);
+        }
+
         this.setIndicatorEvent();
     }
 
@@ -97,7 +93,7 @@ class PagerModule {
         this.maxNumber = 5;
         this.actionIndicator = actionIndicator;
 
-        const pagerInfoElement = target ? target : $(".pager-info");
+        const pagerInfoElement = target || document.querySelector(".pager-info");
         const countInfoElement = `
             <div class="count-info">
                 전체 <b>${this.totalCount}건</b> | 현재 페이지 <b>${this.currentPage}</b>/${this.totalPages}
@@ -118,15 +114,22 @@ class PagerModule {
             selectElement += "</div>";
         }
 
-        pagerInfoElement.html(countInfoElement + selectElement);
+        if (pagerInfoElement)
+            pagerInfoElement.innerHTML = countInfoElement + selectElement;
+
 
         if (customElements && customElements.length > 0) {
-            const target = $("#select-countPerPage");
+            const targetSelect = document.getElementById("select-countPerPage");
             customElements.forEach(item => {
-                item.position === "before"
-                    ? target.before(item.element)
-                    : target.after(item.element);
-            })
+                const element = document.createElement("div");
+                element.innerHTML = item.element;
+                if (targetSelect) {
+                    if (item.position === "before")
+                        targetSelect.parentElement.insertBefore(element.firstChild, targetSelect);
+                    else
+                        targetSelect.parentElement.insertBefore(element.firstChild, targetSelect.nextSibling);
+                }
+            });
         }
     }
 
