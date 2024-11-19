@@ -28,48 +28,41 @@ class PagerModule {
     }
 
     clear() {
-        $(".pager-header").empty();
-        $(".pager-indicator").empty();
+        const pagerHeader = document.querySelector(".pager-header");
+        const pagerIndicator = document.querySelector(".pager-indicator");
+
+        if (pagerHeader)
+            pagerHeader.innerHTML = "";
+        if (pagerIndicator)
+            pagerIndicator.innerHTML = "";
+
         this.loader = null;
     }
 
     initialize() {
         this.clear();
-        const indicatorElement = $(".pager-indicator");
+        const indicatorElement = document.querySelector(".pager-indicator");
 
         let indicators = ``;
-        // this.calculateRange(this.currentPage);
+        indicators += this.switchButton(IndicatorButtonType.FIRST, {
+            isActive: !this.isFirstPage
+        });
+        indicators += this.switchButton(IndicatorButtonType.PREV, {
+            isActive: !this.isFirstPage
+        });
 
-        // if (this.currentPage - 1 > 4) {
-            indicators += this.switchButton(IndicatorButtonType.FIRST, {
-                isActive: !this.isFirstPage
-            });
-            indicators += this.switchButton(IndicatorButtonType.PREV, {
-                isActive: !this.isFirstPage
-            });
-        // }
-
-        const endIndex = Math.min(this.totalPages, this.maxNumber);
-        // for (let index = this.minNumber; index <= endIndex; index ++) {
         for (let index = this.minNumber; index <= this.minNumber + 9; index ++) {
             indicators += index <= this.totalPages
                 ? this.switchButton(IndicatorButtonType.INDEX, { index: index })
                 : this.switchButton(IndicatorButtonType.INDEX, { index: index, isOverPage: true });
         }
 
-        // const lastPageBlockNumber =
-        //     this.totalPages % 5 === 0
-        //         ? this.totalPages - 4
-        //         : this.totalPages - (this.totalPages % 5) + 1;
-
-        // if (lastPageBlockNumber > this.currentPage) {
-            indicators += this.switchButton(IndicatorButtonType.NEXT, {
-                isActive: !this.isLastPage
-            });
-            indicators += this.switchButton(IndicatorButtonType.LAST, {
-                isActive: !this.isLastPage
-            });
-        // }
+        indicators += this.switchButton(IndicatorButtonType.NEXT, {
+            isActive: !this.isLastPage
+        });
+        indicators += this.switchButton(IndicatorButtonType.LAST, {
+            isActive: !this.isLastPage
+        });
 
         if (this.actionIndicator) {
             const opened = `<div class="pager-button-wrapper">`;
@@ -77,8 +70,11 @@ class PagerModule {
             indicators += opened + this.actionIndicator.join() + closed;
         }
 
-        indicatorElement.empty();
-        indicatorElement.append(indicators);
+        if (indicatorElement) {
+            indicatorElement.innerHTML = "";
+            indicatorElement.insertAdjacentHTML("beforeend", indicators);
+        }
+
         this.setIndicatorEvent();
     }
 
@@ -97,7 +93,7 @@ class PagerModule {
         this.maxNumber = 5;
         this.actionIndicator = actionIndicator;
 
-        const pagerInfoElement = target ? target : $(".pager-info");
+        const pagerInfoElement = target || document.querySelector(".pager-info");
         const countInfoElement = `
             <div class="count-info">
                 전체 <b>${this.totalCount}건</b> | 현재 페이지 <b>${this.currentPage}</b>/${this.totalPages}
@@ -118,15 +114,22 @@ class PagerModule {
             selectElement += "</div>";
         }
 
-        pagerInfoElement.html(countInfoElement + selectElement);
+        if (pagerInfoElement)
+            pagerInfoElement.innerHTML = countInfoElement + selectElement;
+
 
         if (customElements && customElements.length > 0) {
-            const target = $("#select-countPerPage");
+            const targetSelect = document.getElementById("select-countPerPage");
             customElements.forEach(item => {
-                item.position === "before"
-                    ? target.before(item.element)
-                    : target.after(item.element);
-            })
+                const element = document.createElement("div");
+                element.innerHTML = item.element;
+                if (targetSelect) {
+                    if (item.position === "before")
+                        targetSelect.parentElement.insertBefore(element.firstChild, targetSelect);
+                    else
+                        targetSelect.parentElement.insertBefore(element.firstChild, targetSelect.nextSibling);
+                }
+            });
         }
     }
 
@@ -135,28 +138,43 @@ class PagerModule {
     }
 
     setPagerHeader(headers= [], sortingItems = [], headerWidths = []) {
-        const headerElement = $(".pager-header");
-        headerElement.empty();
+        const headerElement = document.querySelector(".pager-header");
+        if (!headerElement)
+            return;
+
+        headerElement.innerHTML = "";
 
         const sortingIndexes = sortingItems ? sortingItems.map(item => item.index) : null;
         headers.forEach((header, index) => {
             const isSortColumn = sortingIndexes ? sortingIndexes.includes(index) : false;
+            const th = document.createElement("th");
+
             if (isSortColumn) {
                 const found = sortingItems.find(item => item.index === index);
                 if (found) {
                     const propertyName = found.propertyName || "";
                     const direction = propertyName === this.sortInfo.sortColumn
-                        ? this.sortInfo.sortDirection : "";
-                    return headerElement.append(`<th class="sortable ${direction}" data-property="${propertyName}">${header || ""}</th>`);
+                        ? this.sortInfo.sortDirection
+                        : "";
+
+                    th.className = `sortable ${direction}`;
+                    th.setAttribute("data-property", propertyName);
+                    th.innerHTML = header || "";
+                    headerElement.appendChild(th);
+                    return;
                 }
             }
-            let widthStyle = "";
-            if (headerWidths)
-                widthStyle = "width: " + (headerWidths[index] ? headerWidths[index] : "auto");
 
-            headerElement.append(`<th style="${widthStyle}">${header || ""}</th>`);
+            th.style.width = headerWidths && headerWidths[index] ? headerWidths[index] : "auto";
+
+            th.innerHTML = header || "";
+            headerElement.appendChild(th);
         });
-        $("th.sortable").on("click", (event) => this.handleSortHeader($(event.currentTarget)));
+
+        const sortableHeaders = headerElement.querySelectorAll("th.sortable");
+        sortableHeaders.forEach(th => {
+            th.addEventListener("click", event => this.handleSortHeader(event.currentTarget));
+        });
     }
 
     handleSortHeader(target) {
@@ -168,20 +186,20 @@ class PagerModule {
             DESC: "desc"
         }
 
-        const currentClass = target.attr("class").replace("sortable", "").trim();
-        this.sortInfo.sortColumn = target.data("property");
+        const currentClass = target.className.replace("sortable", "").trim();
+        this.sortInfo.sortColumn = target.getAttribute("data-property");
         switch (currentClass) {
             case ORDER_TYPE.ASC:
-                target.removeClass(ORDER_TYPE.ASC);
+                target.classList.remove(ORDER_TYPE.ASC);
                 this.sortInfo.sortDirection = "";
                 break;
             case ORDER_TYPE.DESC:
-                target.removeClass(ORDER_TYPE.DESC);
-                target.addClass(ORDER_TYPE.ASC);
+                target.classList.remove(ORDER_TYPE.DESC);
+                target.classList.add(ORDER_TYPE.ASC);
                 this.sortInfo.sortDirection = ORDER_TYPE.ASC;
                 break;
             default:
-                target.addClass(ORDER_TYPE.DESC);
+                target.classList.add(ORDER_TYPE.DESC);
                 this.sortInfo.sortDirection = ORDER_TYPE.DESC;
         }
 
@@ -223,27 +241,28 @@ class PagerModule {
     }
 
     setIndicatorEvent() {
-        const indicatorElement = $(".pager-indicator");
-        const $prevButton = indicatorElement.find(".prev");
-        const $nextButton = indicatorElement.find(".next");
-        const $firstButton = indicatorElement.find(".first");
-        const $lastButton = indicatorElement.find(".last");
-        const $otherIndicator = indicatorElement.find(".indicator");
+        const indicatorElement = document.querySelector(".pager-indicator");
+        const prevButton = indicatorElement.querySelector(".prev");
+        const nextButton = indicatorElement.querySelector(".next");
+        const firstButton = indicatorElement.querySelector(".first");
+        const lastButton = indicatorElement.querySelector(".last");
+        const otherIndicators = indicatorElement.querySelectorAll(".indicator");
 
-        if ($firstButton.length > 0 && this.currentPage !== 1) {
-            // $prevButton.click(e => this.loader(this.minNumber - 1));
-            $prevButton.click(e => this.loader(this.prePage));
-            $firstButton.click(e => this.loader(1));
+        if (firstButton.length > 0 && this.currentPage !== 1) {
+            prevButton?.addEventListener("click", () => this.loader(this.prePage));
+            firstButton.addEventListener("click", () => this.loader(1));
         }
-        if ($lastButton.length > 0 && this.currentPage !== this.totalPages) {
-            // $nextButton.click(e => this.loader(this.maxNumber + 1));
-            $nextButton.click(e => this.loader(this.nextPage));
-            $lastButton.click(e => this.loader(this.totalPages));
+        if (lastButton.length > 0 && this.currentPage !== this.totalPages) {
+            nextButton?.addEventListener("click", () => this.loader(this.nextPage));
+            lastButton.addEventListener("click", () => this.loader(this.totalPages));
         }
-        $otherIndicator.click(e => {
-            const targetPage = +e.target.innerText;
-            if (this.currentPage !== targetPage)
-                this.loader(+e.target.innerText);
+
+        otherIndicators.forEach(indicator => {
+            indicator.addEventListener("click", e => {
+                const targetPage = parseInt(e.target.innerText, 10);
+                if (this.currentPage !== targetPage)
+                    this.loader(targetPage);
+            });
         });
     }
 }
