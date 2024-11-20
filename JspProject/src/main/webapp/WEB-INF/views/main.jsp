@@ -10,11 +10,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>youngdev</title>
 
-    <%-- jquery --%>
-    <link rel="stylesheet" href="${path}/resources/libs/jquery/jquery-ui.min.css" />
-    <script src="${path}/resources/libs/jquery/jquery-3.7.0.min.js"></script>
-    <script src="${path}/resources/libs/jquery/jquery-ui.min.js"></script>
-
     <%-- common --%>
     <link rel="stylesheet" href="${path}/resources/css/reset.css"/>
     <link rel="stylesheet" href="${path}/resources/css/global.css"/>
@@ -30,13 +25,9 @@
     <link rel="stylesheet" href="${path}/resources/css/pages/sidebar.css">
     <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet">
 
-    <%-- ckeditor5 --%>
-<%--    <script src="${path}/resources/libs/ckeditor/ckeditor.js"></script>--%>
-
     <script>
         const Api = new ApiModule();
         const Pager = new PagerModule();
-        // const Editor = ClassicEditor;
     </script>
 </head>
 <body>
