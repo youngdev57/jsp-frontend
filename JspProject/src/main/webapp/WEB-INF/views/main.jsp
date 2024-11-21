@@ -1,5 +1,4 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 
@@ -11,8 +10,6 @@
     <title>youngdev</title>
 
     <%-- common --%>
-    <link rel="stylesheet" href="${path}/resources/css/reset.css"/>
-    <link rel="stylesheet" href="${path}/resources/css/global.css"/>
     <script src="${path}/resources/js/constants.js"></script>
     <script src="${path}/resources/js/modules/region.module.js"></script>
     <script src="${path}/resources/js/modules/api.module.js"></script>
@@ -21,6 +18,8 @@
     <script src="${path}/resources/js/modules/file-manager.module.js"></script>
     <script src="${path}/resources/js/modules/thumbnail-manager.module.js"></script>
 
+    <link rel="stylesheet" href="${path}/resources/css/reset.css"/>
+    <link rel="stylesheet" href="${path}/resources/css/global.css"/>
     <link rel="stylesheet" href="${path}/resources/css/pages/modal.css">
     <link rel="stylesheet" href="${path}/resources/css/pages/sidebar.css">
     <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet">
@@ -82,7 +81,6 @@
                 <i class="bx bxs-chevron-down arrow"></i>
             </div>
             <ul class="sub-menu">
-<%--                <li><a href="${path}/template/page">Form</a></li>--%>
                 <li><a href="#">Form</a></li>
             </ul>
         </li>
