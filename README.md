@@ -3,8 +3,8 @@
 - 2개의 사내 프로젝트에 이용되고 있습니다.
 - Javascript의 템플릿 리터럴 표현식과 JSP의 구문이 일부 겹쳐 파일 내 중복 구문이 존재합니다.
 
-📝 문서 원본보기
-- https://www.notion.so/57youngdev/10b3c9cd053f8075b1a0fc5c84c9d0d4?pvs=4
+📝 예시 문서
+- https://57youngdev.notion.site/2253c9cd053f8158a5bae84552264e66
 
 ---
 💬 페이지별 설명 추가 작성 예정
